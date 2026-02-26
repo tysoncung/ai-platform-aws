@@ -1,0 +1,22 @@
+{
+  "name": "@ai-gateway-aws/example-rag-pipeline",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ingest": "tsx ingest.ts",
+    "search": "tsx search.ts",
+    "chat": "tsx chat.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-gateway-aws/sdk": "workspace:*",
+    "dotenv": "^16.4.0",
+    "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}

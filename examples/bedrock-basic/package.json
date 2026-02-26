@@ -1,0 +1,19 @@
+{
+  "name": "@ai-gateway-aws/example-bedrock-basic",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-gateway-aws/sdk": "workspace:*",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}

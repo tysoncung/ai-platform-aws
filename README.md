@@ -257,6 +257,19 @@ pnpm nx run openapi:generate
 
 The SDK uses `openapi-fetch` for fully typed API calls that match the spec exactly.
 
+## Examples
+
+Ready-to-run examples demonstrating real-world usage patterns:
+
+| Example | Description |
+|---------|-------------|
+| [Bedrock Basic](examples/bedrock-basic/) | Get started with AWS Bedrock — completions, streaming, embeddings, and vision |
+| [OpenAI External](examples/openai-external/) | Use OpenAI models with automatic fallback to Bedrock |
+| [BYOK Multi-Tenant](examples/byok-multi-tenant/) | Let users bring their own API keys with per-tenant billing and rate limiting |
+| [RAG Pipeline](examples/rag-pipeline/) | Full retrieval-augmented generation with MongoDB Atlas Vector Search |
+
+Each example is self-contained with its own README, dependencies, and `.env.example`.
+
 ## Project Structure
 
 ```
@@ -266,6 +279,11 @@ ai-gateway-aws/
 │   ├── gateway/          # Fastify AI Gateway service
 │   ├── sdk/              # TypeScript client SDK (openapi-fetch)
 │   └── rag/              # RAG pipeline utilities
+├── examples/
+│   ├── bedrock-basic/    # AWS Bedrock usage examples
+│   ├── openai-external/  # OpenAI with fallback
+│   ├── byok-multi-tenant/# Bring Your Own Key multi-tenant
+│   └── rag-pipeline/     # Full RAG with MongoDB Atlas
 ├── infra/                # AWS CDK infrastructure
 ├── nx.json               # Nx configuration
 ├── docker-compose.yml    # Local development
