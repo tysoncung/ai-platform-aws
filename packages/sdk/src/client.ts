@@ -1,3 +1,5 @@
+import createClient from 'openapi-fetch';
+import type { paths } from '@ai-gateway-aws/openapi/generated/types';
 import type {
   AIGatewayOptions,
   CompletionRequest,
@@ -11,6 +13,7 @@ import type {
 import { parseSSEStream } from './streaming.js';
 
 export class AIGateway {
+  private client: ReturnType<typeof createClient<paths>>;
   private baseUrl: string;
   private apiKey?: string;
   private timeout: number;
@@ -19,72 +22,72 @@ export class AIGateway {
     this.baseUrl = options.baseUrl.replace(/\/$/, '');
     this.apiKey = options.apiKey;
     this.timeout = options.timeout || 30000;
-  }
 
-  private async request<T>(path: string, body?: unknown): Promise<T> {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
-    if (this.apiKey) {
-      headers['Authorization'] = `Bearer ${this.apiKey}`;
-    }
-
-    const response = await fetch(`${this.baseUrl}${path}`, {
-      method: body ? 'POST' : 'GET',
-      headers,
-      body: body ? JSON.stringify(body) : undefined,
-      signal: AbortSignal.timeout(this.timeout),
+    this.client = createClient<paths>({
+      baseUrl: this.baseUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(this.apiKey ? { 'X-API-Key': this.apiKey } : {}),
+      },
     });
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: response.statusText }));
-      throw new Error(`Gateway error ${response.status}: ${(error as Record<string, string>).error}`);
-    }
-
-    return response.json() as Promise<T>;
-  }
-
-  private async requestStream(path: string, body: unknown): Promise<Response> {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
-    if (this.apiKey) {
-      headers['Authorization'] = `Bearer ${this.apiKey}`;
-    }
-
-    const response = await fetch(`${this.baseUrl}${path}`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: response.statusText }));
-      throw new Error(`Gateway error ${response.status}: ${(error as Record<string, string>).error}`);
-    }
-
-    return response;
   }
 
   async complete(req: CompletionRequest): Promise<CompletionResponse> {
-    return this.request<CompletionResponse>('/v1/complete', { ...req, stream: false });
+    const { data, error } = await this.client.POST('/v1/complete', {
+      body: { ...req, stream: false },
+      signal: AbortSignal.timeout(this.timeout),
+    });
+    if (error) throw new Error(`Gateway error: ${JSON.stringify(error)}`);
+    return data as CompletionResponse;
   }
 
   async *stream(req: Omit<CompletionRequest, 'stream'>): AsyncGenerator<string> {
-    const response = await this.requestStream('/v1/complete', { ...req, stream: true });
+    // openapi-fetch doesn't support streaming natively, use raw fetch
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    if (this.apiKey) {
+      headers['X-API-Key'] = this.apiKey;
+    }
+
+    const response = await fetch(`${this.baseUrl}/v1/complete`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ ...req, stream: true }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ error: response.statusText }));
+      throw new Error(`Gateway error ${response.status}: ${(err as Record<string, string>).error}`);
+    }
+
     yield* parseSSEStream(response);
   }
 
   async embed(req: EmbeddingRequest): Promise<EmbeddingResponse> {
-    return this.request<EmbeddingResponse>('/v1/embed', req);
+    const { data, error } = await this.client.POST('/v1/embed', {
+      body: req,
+      signal: AbortSignal.timeout(this.timeout),
+    });
+    if (error) throw new Error(`Gateway error: ${JSON.stringify(error)}`);
+    return data as EmbeddingResponse;
   }
 
   async classify(req: ClassifyRequest): Promise<ClassifyResponse> {
-    return this.request<ClassifyResponse>('/v1/classify', req);
+    const { data, error } = await this.client.POST('/v1/classify', {
+      body: req,
+      signal: AbortSignal.timeout(this.timeout),
+    });
+    if (error) throw new Error(`Gateway error: ${JSON.stringify(error)}`);
+    return data as ClassifyResponse;
   }
 
   async health(): Promise<HealthResponse> {
-    return this.request<HealthResponse>('/health');
+    const { data, error } = await this.client.GET('/health', {
+      signal: AbortSignal.timeout(this.timeout),
+    });
+    if (error) throw new Error(`Gateway error: ${JSON.stringify(error)}`);
+    return data as HealthResponse;
   }
 }
 

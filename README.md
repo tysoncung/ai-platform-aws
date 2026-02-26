@@ -52,6 +52,10 @@ curl http://localhost:3100/health
 ```bash
 # Prerequisites: Node.js 22+, pnpm 9+
 pnpm install
+
+# Generate OpenAPI types
+pnpm nx run openapi:generate
+
 pnpm build
 
 # Start Redis and MongoDB
@@ -220,17 +224,52 @@ This deploys:
 - **ElastiCache Redis** — Response caching
 - **CloudWatch** — Dashboards and alarms
 
+## Monorepo Management
+
+This project uses **Nx** for monorepo management on top of pnpm workspaces, and **OpenAPI** for contract-first API design.
+
+### Nx
+
+Nx provides build caching, task orchestration, and affected-based CI:
+
+```bash
+# Build all packages
+pnpm build
+
+# Only build/test affected packages (CI)
+pnpm build:affected
+pnpm test:affected
+
+# Run a specific target
+pnpm nx run gateway:typecheck
+```
+
+### OpenAPI Contract-First
+
+The API contract is defined in `packages/openapi/openapi.yaml`. TypeScript types are auto-generated from this spec and shared across the gateway and SDK — a single source of truth.
+
+```bash
+# Generate types from the OpenAPI spec
+pnpm nx run openapi:generate
+
+# Types are output to packages/openapi/generated/types.ts
+```
+
+The SDK uses `openapi-fetch` for fully typed API calls that match the spec exactly.
+
 ## Project Structure
 
 ```
 ai-gateway-aws/
 ├── packages/
+│   ├── openapi/          # OpenAPI spec & generated types
 │   ├── gateway/          # Fastify AI Gateway service
-│   ├── sdk/              # TypeScript client SDK
+│   ├── sdk/              # TypeScript client SDK (openapi-fetch)
 │   └── rag/              # RAG pipeline utilities
 ├── infra/                # AWS CDK infrastructure
+├── nx.json               # Nx configuration
 ├── docker-compose.yml    # Local development
-└── .github/workflows/    # CI/CD
+└── .github/workflows/    # CI/CD (nx affected)
 ```
 
 ## Contributing

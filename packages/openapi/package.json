@@ -1,0 +1,22 @@
+{
+  "name": "@ai-gateway-aws/openapi",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./generated/types": {
+      "import": "./generated/types.ts",
+      "types": "./generated/types.ts"
+    },
+    "./generated": {
+      "import": "./generated/index.ts",
+      "types": "./generated/index.ts"
+    }
+  },
+  "scripts": {
+    "generate": "openapi-typescript openapi.yaml -o ./generated/types.ts && echo 'Types generated'"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.0.0"
+  }
+}

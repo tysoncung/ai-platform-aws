@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -24,8 +26,14 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Lint
+        run: pnpm nx affected -t lint --base=origin/main
+
       - name: Typecheck
-        run: pnpm typecheck
+        run: pnpm nx affected -t typecheck --base=origin/main
 
       - name: Build
-        run: pnpm build
+        run: pnpm nx affected -t build --base=origin/main
+
+      - name: Test
+        run: pnpm nx affected -t test --base=origin/main

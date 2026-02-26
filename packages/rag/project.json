@@ -1,0 +1,10 @@
+{
+  "name": "rag",
+  "sourceRoot": "packages/rag/src",
+  "targets": {
+    "build": { "command": "tsc", "options": { "cwd": "packages/rag" } },
+    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "packages/rag" } },
+    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "packages/rag" } },
+    "typecheck": { "command": "tsc --noEmit", "options": { "cwd": "packages/rag" } }
+  }
+}

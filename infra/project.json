@@ -1,0 +1,10 @@
+{
+  "name": "infra",
+  "sourceRoot": "infra",
+  "targets": {
+    "build": { "command": "tsc", "options": { "cwd": "infra" } },
+    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "infra" } },
+    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "infra" } },
+    "typecheck": { "command": "tsc --noEmit", "options": { "cwd": "infra" } }
+  }
+}

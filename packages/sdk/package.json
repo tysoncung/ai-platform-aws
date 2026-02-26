@@ -15,6 +15,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@ai-gateway-aws/openapi": "workspace:*",
     "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.17.0"
   }
 }

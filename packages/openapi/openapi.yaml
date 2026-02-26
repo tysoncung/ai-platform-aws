@@ -1,0 +1,238 @@
+openapi: 3.1.0
+info:
+  title: AI Gateway API
+  description: Multi-provider AI gateway for completions, embeddings, and classification
+  version: 1.0.0
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /v1/complete:
+    post:
+      operationId: complete
+      summary: Text completion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Successful completion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletionResponse'
+
+  /v1/embed:
+    post:
+      operationId: embed
+      summary: Generate embeddings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingRequest'
+      responses:
+        '200':
+          description: Successful embedding
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingResponse'
+
+  /v1/classify:
+    post:
+      operationId: classify
+      summary: Classify text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Successful classification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifyResponse'
+
+  /health:
+    get:
+      operationId: health
+      summary: Health check
+      security: []
+      responses:
+        '200':
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+components:
+  schemas:
+    Message:
+      type: object
+      required: [role, content]
+      properties:
+        role:
+          type: string
+          enum: [system, user, assistant]
+        content:
+          type: string
+
+    CompletionRequest:
+      type: object
+      required: [messages]
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        maxTokens:
+          type: integer
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 2
+        stream:
+          type: boolean
+        systemPrompt:
+          type: string
+
+    CompletionResponse:
+      type: object
+      required: [id, content, model, provider, usage, latencyMs]
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        model:
+          type: string
+        provider:
+          type: string
+        usage:
+          type: object
+          required: [inputTokens, outputTokens, totalTokens, estimatedCost]
+          properties:
+            inputTokens:
+              type: integer
+            outputTokens:
+              type: integer
+            totalTokens:
+              type: integer
+            estimatedCost:
+              type: number
+        latencyMs:
+          type: number
+
+    EmbeddingRequest:
+      type: object
+      required: [input]
+      properties:
+        model:
+          type: string
+        input:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+
+    EmbeddingResponse:
+      type: object
+      required: [embeddings, model, provider, usage]
+      properties:
+        embeddings:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+        model:
+          type: string
+        provider:
+          type: string
+        usage:
+          type: object
+          required: [totalTokens, estimatedCost]
+          properties:
+            totalTokens:
+              type: integer
+            estimatedCost:
+              type: number
+
+    ClassifyRequest:
+      type: object
+      required: [input, labels]
+      properties:
+        model:
+          type: string
+        input:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+
+    ClassifyResponse:
+      type: object
+      required: [label, confidence, scores, model, provider]
+      properties:
+        label:
+          type: string
+        confidence:
+          type: number
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+        model:
+          type: string
+        provider:
+          type: string
+        usage:
+          type: object
+          properties:
+            inputTokens:
+              type: integer
+            outputTokens:
+              type: integer
+            totalTokens:
+              type: integer
+            estimatedCost:
+              type: number
+        latencyMs:
+          type: number
+
+    HealthResponse:
+      type: object
+      required: [status, uptime]
+      properties:
+        status:
+          type: string
+        version:
+          type: string
+        providers:
+          type: array
+          items:
+            type: string
+        uptime:
+          type: number
+        timestamp:
+          type: string
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

@@ -1,0 +1,18 @@
+{
+  "name": "openapi",
+  "sourceRoot": "packages/openapi",
+  "targets": {
+    "generate": {
+      "command": "pnpm generate",
+      "options": { "cwd": "packages/openapi" }
+    },
+    "build": {
+      "dependsOn": ["generate"],
+      "command": "echo 'OpenAPI types generated'",
+      "options": { "cwd": "packages/openapi" }
+    },
+    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "packages/openapi" } },
+    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "packages/openapi" } },
+    "typecheck": { "command": "echo 'No typecheck needed'", "options": { "cwd": "packages/openapi" } }
+  }
+}

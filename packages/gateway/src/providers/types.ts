@@ -1,46 +1,22 @@
-export interface CompletionRequest {
-  model?: string;
-  messages: Message[];
-  maxTokens?: number;
-  temperature?: number;
-  stream?: boolean;
-  systemPrompt?: string;
-}
+// Import API contract types from OpenAPI (single source of truth)
+export type {
+  CompletionRequest,
+  CompletionResponse,
+  EmbeddingRequest,
+  EmbeddingResponse,
+  ClassifyRequest,
+  ClassifyResponse,
+  Message,
+} from '@ai-gateway-aws/openapi/generated';
 
-export interface CompletionResponse {
-  id: string;
-  content: string;
-  model: string;
-  provider: string;
-  usage: {
-    inputTokens: number;
-    outputTokens: number;
-    totalTokens: number;
-    estimatedCost: number;
-  };
-  latencyMs: number;
-}
+import type {
+  CompletionRequest,
+  CompletionResponse,
+  EmbeddingRequest,
+  EmbeddingResponse,
+} from '@ai-gateway-aws/openapi/generated';
 
-export interface EmbeddingRequest {
-  model?: string;
-  input: string | string[];
-}
-
-export interface EmbeddingResponse {
-  embeddings: number[][];
-  model: string;
-  provider: string;
-  usage: {
-    totalTokens: number;
-    estimatedCost: number;
-  };
-}
-
-export interface Message {
-  role: 'system' | 'user' | 'assistant';
-  content: string;
-}
-
+// Provider-specific types (not part of the API contract)
 export interface AIProvider {
   name: string;
   complete(req: CompletionRequest): Promise<CompletionResponse>;
@@ -59,25 +35,4 @@ export interface ModelConfig {
   maxTokens: number;
   costPer1kInput: number;
   costPer1kOutput: number;
-}
-
-export interface ClassifyRequest {
-  model?: string;
-  input: string;
-  labels: string[];
-}
-
-export interface ClassifyResponse {
-  label: string;
-  confidence: number;
-  scores: Record<string, number>;
-  model: string;
-  provider: string;
-  usage: {
-    inputTokens: number;
-    outputTokens: number;
-    totalTokens: number;
-    estimatedCost: number;
-  };
-  latencyMs: number;
 }

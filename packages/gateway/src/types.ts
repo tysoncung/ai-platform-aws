@@ -1,3 +1,4 @@
+// Re-export API types from OpenAPI spec (single source of truth)
 export type {
   CompletionRequest,
   CompletionResponse,
@@ -6,10 +7,10 @@ export type {
   ClassifyRequest,
   ClassifyResponse,
   Message,
-  AIProvider,
-  ProviderConfig,
-  ModelConfig,
-} from './providers/types.js';
+} from '@ai-gateway-aws/openapi/generated';
+
+// Gateway-internal types that are not part of the API contract
+export type { AIProvider, ProviderConfig, ModelConfig } from './providers/types.js';
 
 export interface GatewayConfig {
   port: number;

@@ -4,13 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
-    "typecheck": "pnpm -r typecheck",
+    "build": "nx run-many -t build",
+    "test": "nx run-many -t test",
+    "lint": "nx run-many -t lint",
+    "typecheck": "nx run-many -t typecheck",
+    "build:affected": "nx affected -t build",
+    "test:affected": "nx affected -t test",
     "dev": "pnpm --filter @ai-gateway-aws/gateway dev",
-    "lint": "eslint .",
     "clean": "pnpm -r exec rm -rf dist"
   },
   "devDependencies": {
+    "nx": "^22.5.2",
     "typescript": "^5.6.0"
   },
   "engines": {
