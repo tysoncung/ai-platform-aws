@@ -1,0 +1,24 @@
+{
+  "name": "@ai-gateway-aws/rag",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/pipeline.js",
+  "types": "dist/pipeline.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/pipeline.js",
+      "types": "./dist/pipeline.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-gateway-aws/sdk": "workspace:*",
+    "mongodb": "^6.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
