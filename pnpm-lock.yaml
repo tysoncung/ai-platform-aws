@@ -15,6 +15,57 @@ importers:
         specifier: ^5.6.0
         version: 5.9.3
 
+  examples/agent-auto-tagger:
+    dependencies:
+      '@ai-gateway-aws/agents':
+        specifier: workspace:*
+        version: link:../../packages/agents
+      '@ai-gateway-aws/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      mongodb:
+        specifier: ^6.10.0
+        version: 6.21.0
+    devDependencies:
+      tsx:
+        specifier: ^4.0.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
+  examples/agent-basic:
+    dependencies:
+      '@ai-gateway-aws/agents':
+        specifier: workspace:*
+        version: link:../../packages/agents
+      '@ai-gateway-aws/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+    devDependencies:
+      tsx:
+        specifier: ^4.0.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
+  examples/agent-multi:
+    dependencies:
+      '@ai-gateway-aws/agents':
+        specifier: workspace:*
+        version: link:../../packages/agents
+      '@ai-gateway-aws/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+    devDependencies:
+      tsx:
+        specifier: ^4.0.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
   examples/bedrock-basic:
     dependencies:
       '@ai-gateway-aws/sdk':
@@ -121,6 +172,25 @@ importers:
       tsx:
         specifier: ^4.19.0
         version: 4.21.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
+  packages/agents:
+    dependencies:
+      '@ai-gateway-aws/rag':
+        specifier: workspace:*
+        version: link:../rag
+      '@ai-gateway-aws/sdk':
+        specifier: workspace:*
+        version: link:../sdk
+      mongodb:
+        specifier: ^6.10.0
+        version: 6.21.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.19.12
+        version: 22.19.12
       typescript:
         specifier: ^5.6.0
         version: 5.9.3

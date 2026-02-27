@@ -1,0 +1,26 @@
+{
+  "name": "@ai-gateway-aws/agents",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-gateway-aws/rag": "workspace:*",
+    "@ai-gateway-aws/sdk": "workspace:*",
+    "mongodb": "^6.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.12",
+    "typescript": "^5.6.0"
+  }
+}

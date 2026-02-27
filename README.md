@@ -257,6 +257,72 @@ pnpm nx run openapi:generate
 
 The SDK uses `openapi-fetch` for fully typed API calls that match the spec exactly.
 
+## Agents Framework
+
+The `@ai-gateway-aws/agents` package provides a full agentic AI framework built on top of the gateway.
+
+### Architecture
+
+The Gateway handles LLM calls; Agents handle orchestration, tool use, memory, and multi-step reasoning.
+
+```
+                    ┌─────────────────────────────────┐
+                    │          Agent (ReAct Loop)      │
+                    │                                  │
+                    │  Think → Act → Observe → Repeat  │
+                    │                                  │
+                    │  ┌────────┐  ┌───────────────┐  │
+                    │  │ Tools  │  │    Memory      │  │
+                    │  │        │  │ (Short + Long) │  │
+                    │  └────────┘  └───────────────┘  │
+                    │                                  │
+                    │  ┌────────────┐  ┌───────────┐  │
+                    │  │ Guardrails │  │  Planner   │  │
+                    │  └────────────┘  └───────────┘  │
+                    └───────────────┬──────────────────┘
+                                    │ LLM calls
+                                    ▼
+                    ┌──────────────────────────────────┐
+                    │          AI Gateway              │
+                    │   (Bedrock, OpenAI, etc.)        │
+                    └──────────────────────────────────┘
+```
+
+### Quick Start
+
+```typescript
+import { AIGateway } from '@ai-gateway-aws/sdk';
+import { Agent, calculatorTool, httpTool } from '@ai-gateway-aws/agents';
+
+const gateway = new AIGateway({ baseUrl: 'http://localhost:3100' });
+
+const agent = new Agent(
+  {
+    name: 'assistant',
+    description: 'A helpful research assistant',
+    model: 'claude-3-haiku',
+    tools: [calculatorTool, httpTool],
+    maxIterations: 10,
+  },
+  gateway,
+);
+
+const result = await agent.run('What is 42 * 17 plus the square root of 256?');
+console.log(result.output);
+```
+
+### Features
+
+- **ReAct Loop** — Think → Act → Observe → Repeat until done
+- **Built-in Tools** — HTTP, MongoDB, vector search, calculator, file system, sandboxed code execution
+- **Memory** — In-memory conversation history + MongoDB-backed long-term memory with vector search
+- **Planner** — LLM-powered task decomposition and re-planning on failure
+- **Multi-Agent Orchestration** — Route, pipeline, parallel, and supervisor patterns
+- **Guardrails** — Block destructive ops, PII detection, cost limits, domain allowlists
+- **Human-in-the-Loop** — Configurable approval for sensitive tool calls
+
+See [`packages/agents/`](packages/agents/) for full documentation.
+
 ## Examples
 
 Ready-to-run examples demonstrating real-world usage patterns:
@@ -267,6 +333,9 @@ Ready-to-run examples demonstrating real-world usage patterns:
 | [OpenAI External](examples/openai-external/) | Use OpenAI models with automatic fallback to Bedrock |
 | [BYOK Multi-Tenant](examples/byok-multi-tenant/) | Let users bring their own API keys with per-tenant billing and rate limiting |
 | [RAG Pipeline](examples/rag-pipeline/) | Full retrieval-augmented generation with MongoDB Atlas Vector Search |
+| [Agent Basic](examples/agent-basic/) | Simple agent with calculator + HTTP tools using the ReAct pattern |
+| [Agent Multi](examples/agent-multi/) | Multi-agent pipeline: researcher → writer → reviewer |
+| [Agent Auto-Tagger](examples/agent-auto-tagger/) | Agent that auto-tags a product catalog using DB queries + LLM analysis |
 
 Each example is self-contained with its own README, dependencies, and `.env.example`.
 
@@ -278,12 +347,16 @@ ai-gateway-aws/
 │   ├── openapi/          # OpenAPI spec & generated types
 │   ├── gateway/          # Fastify AI Gateway service
 │   ├── sdk/              # TypeScript client SDK (openapi-fetch)
-│   └── rag/              # RAG pipeline utilities
+│   ├── rag/              # RAG pipeline utilities
+│   └── agents/           # Agentic AI framework (ReAct, tools, memory, orchestration)
 ├── examples/
 │   ├── bedrock-basic/    # AWS Bedrock usage examples
 │   ├── openai-external/  # OpenAI with fallback
 │   ├── byok-multi-tenant/# Bring Your Own Key multi-tenant
-│   └── rag-pipeline/     # Full RAG with MongoDB Atlas
+│   ├── rag-pipeline/     # Full RAG with MongoDB Atlas
+│   ├── agent-basic/      # Simple agent example
+│   ├── agent-multi/      # Multi-agent pipeline
+│   └── agent-auto-tagger/# Auto-tagging with DB + LLM
 ├── infra/                # AWS CDK infrastructure
 ├── nx.json               # Nx configuration
 ├── docker-compose.yml    # Local development

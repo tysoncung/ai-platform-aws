@@ -1,0 +1,11 @@
+{
+  "name": "agents",
+  "sourceRoot": "packages/agents/src",
+  "targets": {
+    "build": { "command": "tsc", "options": { "cwd": "packages/agents" } },
+    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "packages/agents" } },
+    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "packages/agents" } },
+    "typecheck": { "command": "tsc --noEmit", "options": { "cwd": "packages/agents" } }
+  },
+  "implicitDependencies": ["sdk", "rag"]
+}
