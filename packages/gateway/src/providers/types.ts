@@ -7,14 +7,14 @@ export type {
   ClassifyRequest,
   ClassifyResponse,
   Message,
-} from '@ai-gateway-aws/openapi/generated';
+} from '@ai-platform-aws/openapi/generated';
 
 import type {
   CompletionRequest,
   CompletionResponse,
   EmbeddingRequest,
   EmbeddingResponse,
-} from '@ai-gateway-aws/openapi/generated';
+} from '@ai-platform-aws/openapi/generated';
 
 // Provider-specific types (not part of the API contract)
 export interface AIProvider {

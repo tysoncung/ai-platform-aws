@@ -1,13 +1,13 @@
-# AI Gateway AWS
+# AI Platform AWS
 
-> Production-ready AI Gateway for AWS. Route between Bedrock, OpenAI, and more with a single TypeScript SDK.
+> Production-ready AI platform for AWS. Gateway, SDK, RAG, Agents, and more.
 
-[![CI](https://github.com/tysoncung/ai-gateway-aws/actions/workflows/ci.yml/badge.svg)](https://github.com/tysoncung/ai-gateway-aws/actions/workflows/ci.yml)
+[![CI](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml/badge.svg)](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
-AI Gateway AWS is a unified API gateway that routes AI/ML requests across multiple providers. It provides a single interface to interact with AWS Bedrock, OpenAI, and other AI providers with built-in caching, rate limiting, cost tracking, and streaming support.
+AI Platform AWS is a unified API platform that routes AI/ML requests across multiple providers. It provides a single interface to interact with AWS Bedrock, OpenAI, and other AI providers with built-in caching, rate limiting, cost tracking, and streaming support.
 
 ### Architecture
 
@@ -33,8 +33,8 @@ AI Gateway AWS is a unified API gateway that routes AI/ML requests across multip
 
 ```bash
 # Clone the repository
-git clone https://github.com/tysoncung/ai-gateway-aws.git
-cd ai-gateway-aws
+git clone https://github.com/tysoncung/ai-platform-aws.git
+cd ai-platform-aws
 
 # Configure environment
 cp .env.example .env
@@ -68,7 +68,7 @@ pnpm dev
 ## SDK Usage
 
 ```typescript
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 
 const gateway = new AIGateway({
   baseUrl: 'http://localhost:3100',
@@ -179,10 +179,10 @@ OPENAI_API_KEY=your-key
 
 ## RAG Pipeline
 
-The `@ai-gateway-aws/rag` package provides a ready-to-use RAG pipeline:
+The `@ai-platform-aws/rag` package provides a ready-to-use RAG pipeline:
 
 ```typescript
-import { RAGPipeline } from '@ai-gateway-aws/rag';
+import { RAGPipeline } from '@ai-platform-aws/rag';
 
 const rag = new RAGPipeline({
   gatewayUrl: 'http://localhost:3100',
@@ -259,7 +259,7 @@ The SDK uses `openapi-fetch` for fully typed API calls that match the spec exact
 
 ## Agents Framework
 
-The `@ai-gateway-aws/agents` package provides a full agentic AI framework built on top of the gateway.
+The `@ai-platform-aws/agents` package provides a full agentic AI framework built on top of the gateway.
 
 ### Architecture
 
@@ -291,8 +291,8 @@ The Gateway handles LLM calls; Agents handle orchestration, tool use, memory, an
 ### Quick Start
 
 ```typescript
-import { AIGateway } from '@ai-gateway-aws/sdk';
-import { Agent, calculatorTool, httpTool } from '@ai-gateway-aws/agents';
+import { AIGateway } from '@ai-platform-aws/sdk';
+import { Agent, calculatorTool, httpTool } from '@ai-platform-aws/agents';
 
 const gateway = new AIGateway({ baseUrl: 'http://localhost:3100' });
 
@@ -342,7 +342,7 @@ Each example is self-contained with its own README, dependencies, and `.env.exam
 ## Project Structure
 
 ```
-ai-gateway-aws/
+ai-platform-aws/
 ├── packages/
 │   ├── openapi/          # OpenAPI spec & generated types
 │   ├── gateway/          # Fastify AI Gateway service

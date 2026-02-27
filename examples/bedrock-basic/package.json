@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/example-bedrock-basic",
+  "name": "@ai-platform-aws/example-bedrock-basic",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-gateway-aws/sdk": "workspace:*",
+    "@ai-platform-aws/sdk": "workspace:*",
     "dotenv": "^16.4.0"
   },
   "devDependencies": {

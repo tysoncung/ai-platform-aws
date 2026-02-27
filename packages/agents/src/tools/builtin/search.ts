@@ -1,7 +1,7 @@
 import type { Tool, ToolResult } from '../types.js';
 
 export interface SearchToolOptions {
-  /** Function that performs vector search - typically backed by @ai-gateway-aws/rag */
+  /** Function that performs vector search - typically backed by @ai-platform-aws/rag */
   searchFn: (query: string, options?: { limit?: number; filter?: Record<string, unknown> }) => Promise<SearchResult[]>;
 }
 

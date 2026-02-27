@@ -5,7 +5,7 @@
  * analyzes their descriptions, generates relevant tags, and applies them.
  */
 import { MongoClient } from 'mongodb';
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 import {
   Agent,
   createDatabaseTool,
@@ -13,7 +13,7 @@ import {
   Guardrails,
   HumanApproval,
   approveWrites,
-} from '@ai-gateway-aws/agents';
+} from '@ai-platform-aws/agents';
 
 async function main() {
   const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017';

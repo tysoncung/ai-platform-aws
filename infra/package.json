@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/infra",
+  "name": "@ai-platform-aws/infra",
   "version": "0.1.0",
   "private": true,
   "type": "module",

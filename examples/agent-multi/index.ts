@@ -6,8 +6,8 @@
  * 2. Writer - drafts content based on research
  * 3. Reviewer - reviews and improves the content
  */
-import { AIGateway } from '@ai-gateway-aws/sdk';
-import { Agent, Orchestrator, httpTool, calculatorTool } from '@ai-gateway-aws/agents';
+import { AIGateway } from '@ai-platform-aws/sdk';
+import { Agent, Orchestrator, httpTool, calculatorTool } from '@ai-platform-aws/agents';
 
 async function main() {
   const gateway = new AIGateway({

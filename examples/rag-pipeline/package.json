@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/example-rag-pipeline",
+  "name": "@ai-platform-aws/example-rag-pipeline",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-gateway-aws/sdk": "workspace:*",
+    "@ai-platform-aws/sdk": "workspace:*",
     "dotenv": "^16.4.0",
     "mongodb": "^6.3.0"
   },

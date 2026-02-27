@@ -13,7 +13,7 @@
 
 import 'dotenv/config';
 import { MongoClient } from 'mongodb';
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 
 // ---------------------------------------------------------------------------
 // Configuration

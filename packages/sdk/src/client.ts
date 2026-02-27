@@ -1,5 +1,5 @@
 import createClient from 'openapi-fetch';
-import type { paths } from '@ai-gateway-aws/openapi/generated/types';
+import type { paths } from '@ai-platform-aws/openapi/generated/types';
 import type {
   AIGatewayOptions,
   CompletionRequest,

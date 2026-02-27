@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/sdk",
+  "name": "@ai-platform-aws/sdk",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/client.js",
@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@ai-gateway-aws/openapi": "workspace:*",
+    "@ai-platform-aws/openapi": "workspace:*",
     "typescript": "^5.6.0"
   },
   "dependencies": {

@@ -16,7 +16,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MongoClient } from 'mongodb';
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 
 // ---------------------------------------------------------------------------
 // Configuration

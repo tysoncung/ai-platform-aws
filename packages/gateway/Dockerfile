@@ -7,7 +7,7 @@ COPY pnpm-workspace.yaml package.json pnpm-lock.yaml tsconfig.base.json ./
 COPY packages/gateway ./packages/gateway
 
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @ai-gateway-aws/gateway build
+RUN pnpm --filter @ai-platform-aws/gateway build
 
 FROM node:22-alpine AS runner
 

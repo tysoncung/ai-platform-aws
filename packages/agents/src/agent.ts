@@ -1,4 +1,4 @@
-import type { AIGateway } from '@ai-gateway-aws/sdk';
+import type { AIGateway } from '@ai-platform-aws/sdk';
 import type { AgentConfig, AgentContext, AgentResult, Message } from './types.js';
 import type { ToolCall, ToolResult } from './tools/types.js';
 import { ConversationMemory } from './memory/conversation.js';

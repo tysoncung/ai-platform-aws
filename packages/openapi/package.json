@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/openapi",
+  "name": "@ai-platform-aws/openapi",
   "version": "0.1.0",
   "private": true,
   "type": "module",

@@ -3,8 +3,8 @@
  *
  * A simple agent with calculator and HTTP tools that can answer research questions.
  */
-import { AIGateway } from '@ai-gateway-aws/sdk';
-import { Agent, calculatorTool, httpTool } from '@ai-gateway-aws/agents';
+import { AIGateway } from '@ai-platform-aws/sdk';
+import { Agent, calculatorTool, httpTool } from '@ai-platform-aws/agents';
 
 async function main() {
   // Connect to the AI Gateway

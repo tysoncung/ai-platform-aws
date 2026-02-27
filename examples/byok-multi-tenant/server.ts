@@ -17,7 +17,7 @@
 
 import 'dotenv/config';
 import express from 'express';
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 import { userKeyMiddleware } from './middleware/user-key.js';
 import { rateLimitMiddleware, trackUsage, getUsageSummary } from './middleware/usage-tracker.js';
 import type { TenantRequest } from './types.js';

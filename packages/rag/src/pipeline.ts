@@ -1,4 +1,4 @@
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 import { VectorSearch } from './vector-search.js';
 import { chunkText } from './chunker.js';
 import type { RAGPipelineOptions, RAGResponse } from './types.js';

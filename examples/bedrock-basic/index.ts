@@ -9,7 +9,7 @@
  */
 
 import 'dotenv/config';
-import { AIGateway } from '@ai-gateway-aws/sdk';
+import { AIGateway } from '@ai-platform-aws/sdk';
 
 // ---------------------------------------------------------------------------
 // Setup

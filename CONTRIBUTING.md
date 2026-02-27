@@ -1,4 +1,4 @@
-# Contributing to AI Gateway AWS
+# Contributing to AI Platform AWS
 
 Thank you for your interest in contributing! Here's how to get started.
 
@@ -7,8 +7,8 @@ Thank you for your interest in contributing! Here's how to get started.
 1. **Prerequisites:** Node.js 22+, pnpm 9+, Docker
 2. **Clone and install:**
    ```bash
-   git clone https://github.com/tysoncung/ai-gateway-aws.git
-   cd ai-gateway-aws
+   git clone https://github.com/tysoncung/ai-platform-aws.git
+   cd ai-platform-aws
    pnpm install
    ```
 3. **Start local services:**

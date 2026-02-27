@@ -8,8 +8,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-gateway-aws/sdk": "workspace:*",
-    "@ai-gateway-aws/agents": "workspace:*"
+    "@ai-platform-aws/sdk": "workspace:*",
+    "@ai-platform-aws/agents": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.0.0",

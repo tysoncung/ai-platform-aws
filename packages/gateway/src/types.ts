@@ -7,7 +7,7 @@ export type {
   ClassifyRequest,
   ClassifyResponse,
   Message,
-} from '@ai-gateway-aws/openapi/generated';
+} from '@ai-platform-aws/openapi/generated';
 
 // Gateway-internal types that are not part of the API contract
 export type { AIProvider, ProviderConfig, ModelConfig } from './providers/types.js';

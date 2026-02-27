@@ -29,7 +29,7 @@ pnpm start
 
 ## How It Works
 
-This example uses the `@ai-gateway-aws/sdk` client to communicate with the gateway. The gateway handles all AWS Bedrock authentication and request translation — your application code stays provider-agnostic.
+This example uses the `@ai-platform-aws/sdk` client to communicate with the gateway. The gateway handles all AWS Bedrock authentication and request translation — your application code stays provider-agnostic.
 
 ```
 Your App → AI Gateway → AWS Bedrock → Model Response

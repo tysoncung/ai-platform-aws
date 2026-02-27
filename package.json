@@ -1,5 +1,5 @@
 {
-  "name": "ai-gateway-aws",
+  "name": "ai-platform-aws",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "typecheck": "nx run-many -t typecheck",
     "build:affected": "nx affected -t build",
     "test:affected": "nx affected -t test",
-    "dev": "pnpm --filter @ai-gateway-aws/gateway dev",
+    "dev": "pnpm --filter @ai-platform-aws/gateway dev",
     "clean": "pnpm -r exec rm -rf dist"
   },
   "devDependencies": {

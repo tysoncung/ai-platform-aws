@@ -1,4 +1,4 @@
-import type { AIGateway } from '@ai-gateway-aws/sdk';
+import type { AIGateway } from '@ai-platform-aws/sdk';
 import type { Agent } from './agent.js';
 import type { AgentResult } from './types.js';
 

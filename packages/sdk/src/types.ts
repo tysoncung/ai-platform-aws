@@ -11,7 +11,7 @@ export type {
   ClassifyRequest,
   ClassifyResponse,
   HealthResponse,
-} from '@ai-gateway-aws/openapi/generated';
+} from '@ai-platform-aws/openapi/generated';
 
 export interface AIGatewayOptions {
   baseUrl: string;

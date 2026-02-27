@@ -1,5 +1,5 @@
 {
-  "name": "@ai-gateway-aws/agents",
+  "name": "@ai-platform-aws/agents",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -15,8 +15,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-gateway-aws/rag": "workspace:*",
-    "@ai-gateway-aws/sdk": "workspace:*",
+    "@ai-platform-aws/rag": "workspace:*",
+    "@ai-platform-aws/sdk": "workspace:*",
     "mongodb": "^6.10.0"
   },
   "devDependencies": {

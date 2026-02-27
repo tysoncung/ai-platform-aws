@@ -1,4 +1,4 @@
-import type { AIGateway } from '@ai-gateway-aws/sdk';
+import type { AIGateway } from '@ai-platform-aws/sdk';
 import type { Plan, PlanStep } from './types.js';
 import type { Tool } from './tools/types.js';
 
