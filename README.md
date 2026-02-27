@@ -11,21 +11,9 @@ AI Platform AWS is a unified API platform that routes AI/ML requests across mult
 
 ### Architecture
 
-```
-          
-   Client     >          AI Gateway (Fastify)         > AWS Bedrock  
-   (SDK)      <                                      <             
-                
-                       Auth   Rate      Cost       
-                              Limit     Tracker         
-                          >   OpenAI     
-                                                          <             
-                               
-                        Redis         MongoDB         
-                        Cache       Prompt Store      
-                          
-                    
-```
+![Architecture Overview](docs/diagrams/architecture-overview.png)
+
+> *Editable source: [architecture-overview.drawio](docs/diagrams/architecture-overview.drawio) — open in [draw.io](https://app.diagrams.net/)*
 
 ## Quick Start
 
@@ -179,6 +167,8 @@ OPENAI_API_KEY=your-key
 
 ## RAG Pipeline
 
+![RAG Pipeline](docs/diagrams/rag-pipeline.png)
+
 The `@ai-platform-aws/rag` package provides a ready-to-use RAG pipeline:
 
 ```typescript
@@ -203,6 +193,8 @@ console.log(`Sources: ${result.sources.length}`);
 ```
 
 ## Deployment (AWS CDK)
+
+![AWS Deployment](docs/diagrams/aws-deployment.png)
 
 ```bash
 cd infra
@@ -265,28 +257,11 @@ The `@ai-platform-aws/agents` package provides a full agentic AI framework built
 
 The Gateway handles LLM calls; Agents handle orchestration, tool use, memory, and multi-step reasoning.
 
-```
-                    
-                              Agent (ReAct Loop)      
-                                                      
-                      Think -> Act -> Observe -> Repeat  
-                                                      
-                          
-                       Tools        Memory        
-                                 (Short + Long)   
-                          
-                                                      
-                          
-                       Guardrails     Planner     
-                          
-                    
-                                     LLM calls
-                                    
-                    
-                              AI Gateway              
-                       (Bedrock, OpenAI, etc.)        
-                    
-```
+![ReAct Agent Loop](docs/diagrams/agent-react-loop.png)
+
+### Multi-Agent Orchestration Patterns
+
+![Multi-Agent Patterns](docs/diagrams/multi-agent-patterns.png)
 
 ### Quick Start
 
