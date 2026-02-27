@@ -1,43 +1,41 @@
 import { describe, it, expect, vi } from 'vitest';
 
-// Mock SDK and MongoDB before imports
+const mockEmbed = vi.fn().mockResolvedValue({
+  embeddings: [[0.1, 0.2, 0.3]],
+  usage: { totalTokens: 5, estimatedCost: 0.0001 },
+});
+const mockComplete = vi.fn().mockResolvedValue({
+  content: 'The answer based on context.',
+  usage: { totalTokens: 50, estimatedCost: 0.001 },
+});
+
 vi.mock('@ai-platform-aws/sdk', () => ({
-  AIGateway: vi.fn().mockImplementation(() => ({
-    embed: vi.fn().mockResolvedValue({
-      embeddings: [[0.1, 0.2, 0.3]],
-      usage: { totalTokens: 5, estimatedCost: 0.0001 },
-    }),
-    complete: vi.fn().mockResolvedValue({
-      content: 'The answer based on context.',
-      usage: { totalTokens: 50, estimatedCost: 0.001 },
-    }),
-  })),
+  AIGateway: class {
+    embed = mockEmbed;
+    complete = mockComplete;
+  },
 }));
 
-vi.mock('mongodb', () => {
-  const mockCollection = {
-    insertMany: vi.fn(),
-    aggregate: vi.fn().mockReturnValue({
-      toArray: vi.fn().mockResolvedValue([
-        { content: 'Relevant chunk 1', score: 0.9, metadata: {} },
-        { content: 'Relevant chunk 2', score: 0.8, metadata: {} },
-      ]),
-    }),
-  };
-  return {
-    MongoClient: vi.fn().mockImplementation(() => ({
-      connect: vi.fn(),
-      close: vi.fn(),
-      db: vi.fn().mockReturnValue({
-        collection: vi.fn().mockReturnValue(mockCollection),
+const mockToArray = vi.fn().mockResolvedValue([
+  { content: 'Relevant chunk 1', score: 0.9, metadata: {} },
+  { content: 'Relevant chunk 2', score: 0.8, metadata: {} },
+]);
+
+vi.mock('mongodb', () => ({
+  MongoClient: class {
+    connect = vi.fn();
+    close = vi.fn();
+    db = vi.fn().mockReturnValue({
+      collection: vi.fn().mockReturnValue({
+        insertMany: vi.fn(),
+        aggregate: vi.fn().mockReturnValue({ toArray: mockToArray }),
       }),
-    })),
-  };
-});
+    });
+  },
+}));
 
 describe('RAGPipeline', () => {
   it('completes full RAG flow: query -> embed -> search -> augment -> complete', async () => {
-    // Dynamic import after mocks
     const { RAGPipeline } = await import('../pipeline.js');
 
     const pipeline = new RAGPipeline({
