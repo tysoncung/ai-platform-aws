@@ -2,10 +2,32 @@
   "name": "sdk",
   "sourceRoot": "packages/sdk/src",
   "targets": {
-    "build": { "command": "tsc", "options": { "cwd": "packages/sdk" } },
-    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "packages/sdk" } },
-    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "packages/sdk" } },
-    "typecheck": { "command": "tsc --noEmit", "options": { "cwd": "packages/sdk" } }
+    "build": {
+      "command": "tsc",
+      "options": {
+        "cwd": "packages/sdk"
+      }
+    },
+    "test": {
+      "command": "vitest run",
+      "options": {
+        "cwd": "packages/sdk"
+      }
+    },
+    "lint": {
+      "command": "eslint src/",
+      "options": {
+        "cwd": "packages/sdk"
+      }
+    },
+    "typecheck": {
+      "command": "tsc --noEmit",
+      "options": {
+        "cwd": "packages/sdk"
+      }
+    }
   },
-  "implicitDependencies": ["openapi"]
+  "implicitDependencies": [
+    "openapi"
+  ]
 }

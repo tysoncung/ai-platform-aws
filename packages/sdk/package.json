@@ -12,7 +12,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@ai-platform-aws/openapi": "workspace:*",

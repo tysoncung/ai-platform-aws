@@ -8,11 +8,16 @@
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
     "@aws-sdk/client-bedrock-runtime": "^3.700.0",
     "@fastify/rate-limit": "^10.0.0",
+    "@google/generative-ai": "^0.24.1",
+    "cohere-ai": "^7.20.0",
     "fastify": "^5.0.0",
     "mongodb": "^6.10.0",
     "openai": "^4.70.0",

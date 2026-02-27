@@ -2,10 +2,32 @@
   "name": "gateway",
   "sourceRoot": "packages/gateway/src",
   "targets": {
-    "build": { "command": "tsc", "options": { "cwd": "packages/gateway" } },
-    "test": { "command": "echo 'No tests configured'", "options": { "cwd": "packages/gateway" } },
-    "lint": { "command": "echo 'No lint configured'", "options": { "cwd": "packages/gateway" } },
-    "typecheck": { "command": "tsc --noEmit", "options": { "cwd": "packages/gateway" } }
+    "build": {
+      "command": "tsc",
+      "options": {
+        "cwd": "packages/gateway"
+      }
+    },
+    "test": {
+      "command": "vitest run",
+      "options": {
+        "cwd": "packages/gateway"
+      }
+    },
+    "lint": {
+      "command": "eslint src/",
+      "options": {
+        "cwd": "packages/gateway"
+      }
+    },
+    "typecheck": {
+      "command": "tsc --noEmit",
+      "options": {
+        "cwd": "packages/gateway"
+      }
+    }
   },
-  "implicitDependencies": ["openapi"]
+  "implicitDependencies": [
+    "openapi"
+  ]
 }

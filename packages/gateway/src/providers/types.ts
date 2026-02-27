@@ -25,7 +25,7 @@ export interface AIProvider {
 }
 
 export interface ProviderConfig {
-  provider: 'bedrock' | 'openai' | 'azure';
+  provider: 'bedrock' | 'openai' | 'azure' | 'azure-openai' | 'gemini' | 'anthropic' | 'cohere';
   models: Record<string, ModelConfig>;
   fallback?: string;
 }

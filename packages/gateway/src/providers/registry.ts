@@ -1,6 +1,10 @@
 import type { AIProvider, ProviderConfig } from './types.js';
 import { BedrockProvider } from './bedrock.js';
 import { OpenAIProvider } from './openai.js';
+import { AzureOpenAIProvider } from './azure-openai.js';
+import { GeminiProvider } from './gemini.js';
+import { AnthropicProvider } from './anthropic.js';
+import { CohereProvider } from './cohere.js';
 
 export class ProviderRegistry {
   private providers = new Map<string, AIProvider>();
@@ -26,11 +30,16 @@ export class ProviderRegistry {
 
   resolveForModel(model: string): AIProvider {
     for (const [, provider] of this.providers) {
-      // Check if any provider config knows this model
       if (provider.name === 'bedrock' && model.startsWith('claude-3')) return provider;
       if (provider.name === 'bedrock' && model.startsWith('titan')) return provider;
       if (provider.name === 'openai' && model.startsWith('gpt-')) return provider;
       if (provider.name === 'openai' && model.startsWith('text-embedding')) return provider;
+      if (provider.name === 'azure-openai' && model.startsWith('azure-')) return provider;
+      if (provider.name === 'gemini' && model.startsWith('gemini-')) return provider;
+      if (provider.name === 'anthropic' && model.startsWith('claude-3-5')) return provider;
+      if (provider.name === 'anthropic' && model.startsWith('claude-3-opus')) return provider;
+      if (provider.name === 'cohere' && model.startsWith('command-r')) return provider;
+      if (provider.name === 'cohere' && model.startsWith('embed-')) return provider;
     }
     throw new Error(`No provider found for model: ${model}`);
   }
@@ -51,6 +60,18 @@ export class ProviderRegistry {
           break;
         case 'openai':
           provider = new OpenAIProvider(config.models);
+          break;
+        case 'azure-openai':
+          provider = new AzureOpenAIProvider(config.models);
+          break;
+        case 'gemini':
+          provider = new GeminiProvider(config.models);
+          break;
+        case 'anthropic':
+          provider = new AnthropicProvider(config.models);
+          break;
+        case 'cohere':
+          provider = new CohereProvider(config.models);
           break;
         default:
           throw new Error(`Unknown provider type: ${config.provider}`);

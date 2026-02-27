@@ -6,16 +6,20 @@
   "scripts": {
     "build": "nx run-many -t build",
     "test": "nx run-many -t test",
-    "lint": "nx run-many -t lint",
+    "lint": "eslint .",
     "typecheck": "nx run-many -t typecheck",
     "build:affected": "nx affected -t build",
     "test:affected": "nx affected -t test",
     "dev": "pnpm --filter @ai-platform-aws/gateway dev",
-    "clean": "pnpm -r exec rm -rf dist"
+    "clean": "pnpm -r exec rm -rf dist",
+    "test:coverage": "nx run-many -t test -- --coverage",
+    "format": "prettier --write ."
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.18",
     "nx": "^22.5.2",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
   },
   "engines": {
     "node": ">=22",

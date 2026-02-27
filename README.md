@@ -182,6 +182,53 @@ Supported models:
 OPENAI_API_KEY=your-key
 ```
 
+### Azure OpenAI
+
+Supported models:
+- `azure-gpt-4o` - GPT-4o via Azure deployment
+- `azure-gpt-4o-mini` - GPT-4o-mini via Azure deployment
+- `azure-text-embedding-3-small` - Compact embeddings via Azure
+- `azure-text-embedding-3-large` - High-dimension embeddings via Azure
+
+```bash
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
+AZURE_OPENAI_API_KEY=your-key
+```
+
+### Google Gemini
+
+Supported models:
+- `gemini-2.0-flash` - Fast and efficient
+- `gemini-1.5-pro` - High capability
+- `text-embedding-004` - Text embeddings
+
+```bash
+GOOGLE_AI_API_KEY=your-key
+```
+
+### Anthropic Direct
+
+Supported models:
+- `claude-3-5-sonnet` - High capability
+- `claude-3-haiku-direct` - Fast and cost-effective
+- `claude-3-opus` - Most capable
+
+```bash
+ANTHROPIC_API_KEY=your-key
+```
+
+### Cohere
+
+Supported models:
+- `command-r-plus` - High capability
+- `command-r` - Cost-effective
+- `embed-english-v3.0` - English embeddings
+- `embed-multilingual-v3.0` - Multilingual embeddings
+
+```bash
+COHERE_API_KEY=your-key
+```
+
 ## RAG Pipeline
 
 ```mermaid
