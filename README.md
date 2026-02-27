@@ -11,9 +11,26 @@ AI Platform AWS is a unified API platform that routes AI/ML requests across mult
 
 ### Architecture
 
+```mermaid
+graph TD
+    App[Your Application] --> SDK["@ai-platform-aws/sdk"]
+    SDK --> Gateway["AI Gateway (ECS Fargate)"]
+    Gateway --> Bedrock["AWS Bedrock<br/>Claude 3 | Titan"]
+    Gateway --> OpenAI["OpenAI API<br/>GPT-4o | DALL-E"]
+    Gateway --> Azure["Azure OpenAI<br/>Copilot Studio"]
+    Gateway --> Others["Other APIs<br/>Cohere | Gemini"]
+    Gateway --> Cache["Redis Cache"]
+    Gateway --> CostDB["MongoDB<br/>Cost Tracking | Prompts"]
+    Agents["@ai-platform-aws/agents"] --> SDK
+    Agents --> Tools["Tool Registry<br/>HTTP | DB | Search | Code"]
+    Agents --> Memory["Memory<br/>Conversation | Persistent"]
+    RAG["@ai-platform-aws/rag"] --> VectorDB["MongoDB Atlas<br/>Vector Search"]
+    RAG --> SDK
+```
+
 ![Architecture Overview](docs/diagrams/architecture-overview.png)
 
-> *Editable source: [architecture-overview.drawio](docs/diagrams/architecture-overview.drawio) — open in [draw.io](https://app.diagrams.net/)*
+> *Editable source: [architecture-overview.drawio](docs/diagrams/architecture-overview.drawio) -- open in [draw.io](https://app.diagrams.net/)*
 
 ## Quick Start
 
@@ -167,6 +184,17 @@ OPENAI_API_KEY=your-key
 
 ## RAG Pipeline
 
+```mermaid
+flowchart LR
+    subgraph Ingestion
+        Docs[Documents] --> Chunk[Chunker] --> Embed1[Embeddings] --> Store[MongoDB Atlas<br/>Vector Store]
+    end
+    subgraph Query
+        Question[User Question] --> Embed2[Embed Query] --> Search[Vector Search] --> TopK[Top K Chunks] --> Prompt[Augment Prompt] --> LLM[LLM] --> Answer[Answer]
+    end
+    Store -.-> Search
+```
+
 ![RAG Pipeline](docs/diagrams/rag-pipeline.png)
 
 The `@ai-platform-aws/rag` package provides a ready-to-use RAG pipeline:
@@ -257,9 +285,44 @@ The `@ai-platform-aws/agents` package provides a full agentic AI framework built
 
 The Gateway handles LLM calls; Agents handle orchestration, tool use, memory, and multi-step reasoning.
 
+```mermaid
+flowchart TD
+    Task[User Task] --> Agent[Agent]
+    Agent --> LLM[LLM - Think]
+    LLM --> Decision{Tool Call or Final Answer?}
+    Decision -->|Tool Call| Guardrails[Guardrails Check]
+    Guardrails --> Approval{Needs Approval?}
+    Approval -->|Yes| Human[Human Approval]
+    Human -->|Approved| Execute[Execute Tool]
+    Human -->|Rejected| Agent
+    Approval -->|No| Execute
+    Execute --> Observe[Observation]
+    Observe --> Memory[Update Memory]
+    Memory --> Agent
+    Decision -->|Final Answer| Result[Return Result]
+```
+
 ![ReAct Agent Loop](docs/diagrams/agent-react-loop.png)
 
+> *Editable source: [agent-react-loop.drawio](docs/diagrams/agent-react-loop.drawio) -- open in [draw.io](https://app.diagrams.net/)*
+
 ### Multi-Agent Orchestration Patterns
+
+```mermaid
+graph LR
+    subgraph Router
+        T1[Task] --> R[Router] --> A1[Best Agent] --> R1[Result]
+    end
+    subgraph Pipeline
+        T2[Task] --> P1[Agent A] --> P2[Agent B] --> P3[Agent C] --> R2[Result]
+    end
+    subgraph Parallel
+        T3[Task] --> PA1[Agent A] & PA2[Agent B] & PA3[Agent C] --> Merge[Merge] --> R3[Result]
+    end
+    subgraph Supervisor
+        T4[Task] --> S[Supervisor] --> W1[Worker A] & W2[Worker B] --> S --> R4[Result]
+    end
+```
 
 ![Multi-Agent Patterns](docs/diagrams/multi-agent-patterns.png)
 
