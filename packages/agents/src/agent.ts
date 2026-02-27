@@ -63,7 +63,7 @@ export class Agent {
       const parsedToolCall = this.parseToolCall(content);
 
       if (!parsedToolCall) {
-        // Final answer — no tool call found
+        // Final answer - no tool call found
         await memory.addMessage({
           role: 'assistant',
           content,

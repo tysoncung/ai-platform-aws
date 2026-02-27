@@ -36,13 +36,13 @@ function isValidKeyFormat(key: string, provider: UserProvider): boolean {
  *
  * Headers:
  *   X-User-API-Key:  The user's own API key (optional)
- *   X-User-Provider: Which provider the key is for — "openai" | "anthropic"
+ *   X-User-Provider: Which provider the key is for - "openai" | "anthropic"
  */
 export function userKeyMiddleware(req: TenantRequest, res: Response, next: NextFunction): void {
   const userApiKey = req.headers['x-user-api-key'] as string | undefined;
   const userProvider = req.headers['x-user-provider'] as string | undefined;
 
-  // No user key — will use platform Bedrock default
+  // No user key - will use platform Bedrock default
   if (!userApiKey) {
     next();
     return;
@@ -68,7 +68,7 @@ export function userKeyMiddleware(req: TenantRequest, res: Response, next: NextF
 
   const provider = userProvider as UserProvider;
 
-  // Validate key format (basic check — the actual provider will do full auth)
+  // Validate key format (basic check - the actual provider will do full auth)
   if (!isValidKeyFormat(userApiKey, provider)) {
     res.status(400).json({
       error: `Invalid API key format for provider: ${provider}`,

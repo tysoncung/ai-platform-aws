@@ -5,7 +5,7 @@
  * 1. GPT-4o completion
  * 2. Streaming with GPT-4o-mini
  * 3. Embeddings with text-embedding-3-small
- * 4. Fallback pattern: Bedrock → OpenAI
+ * 4. Fallback pattern: Bedrock -> OpenAI
  */
 
 import 'dotenv/config';
@@ -91,7 +91,7 @@ async function openaiEmbeddings() {
 // ---------------------------------------------------------------------------
 
 async function fallbackPattern() {
-  console.log('\n=== 4. Fallback: Bedrock → OpenAI ===\n');
+  console.log('\n=== 4. Fallback: Bedrock -> OpenAI ===\n');
 
   const messages = [
     { role: 'user' as const, content: 'What is the capital of France? One word.' },
@@ -113,15 +113,15 @@ async function fallbackPattern() {
         messages,
         maxTokens: 50,
       });
-      console.log(`✅ ${label} responded: ${response.content}`);
-      return; // Success — stop trying
+      console.log(` ${label} responded: ${response.content}`);
+      return; // Success - stop trying
     } catch (err) {
-      console.log(`⚠️  ${label} failed: ${(err as Error).message}`);
+      console.log(`  ${label} failed: ${(err as Error).message}`);
       // Continue to next provider
     }
   }
 
-  console.error('❌ All providers failed.');
+  console.error(' All providers failed.');
 }
 
 // ---------------------------------------------------------------------------
@@ -129,13 +129,13 @@ async function fallbackPattern() {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('🚀 OpenAI External Provider Examples');
+  console.log(' OpenAI External Provider Examples');
 
   try {
     const health = await gateway.health();
     console.log(`   Gateway: ${process.env.GATEWAY_URL || 'http://localhost:3000'} (${health.status})`);
   } catch (err) {
-    console.error('⚠️  Cannot reach gateway:', (err as Error).message);
+    console.error('  Cannot reach gateway:', (err as Error).message);
     process.exit(1);
   }
 
@@ -145,11 +145,11 @@ async function main() {
     await openaiEmbeddings();
     await fallbackPattern();
   } catch (err) {
-    console.error('\n❌ Error:', (err as Error).message);
+    console.error('\n Error:', (err as Error).message);
     process.exit(1);
   }
 
-  console.log('\n✅ All examples completed successfully!');
+  console.log('\n All examples completed successfully!');
 }
 
 main();

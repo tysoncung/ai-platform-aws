@@ -64,10 +64,10 @@ async function main() {
   orchestrator.addAgent(writer);
   orchestrator.addAgent(reviewer);
 
-  // Run as a pipeline: researcher → writer → reviewer
+  // Run as a pipeline: researcher -> writer -> reviewer
   const topic = process.argv[2] || 'The impact of renewable energy on global economics';
   console.log(`\nTopic: ${topic}\n`);
-  console.log('Running pipeline: researcher → writer → reviewer\n');
+  console.log('Running pipeline: researcher -> writer -> reviewer\n');
 
   const result = await orchestrator.pipeline(topic, ['researcher', 'writer', 'reviewer']);
 

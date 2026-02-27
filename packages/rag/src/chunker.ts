@@ -37,7 +37,7 @@ export function chunkText(text: string, options: ChunkOptions): TextChunk[] {
 }
 
 export function chunkByTokenEstimate(text: string, maxTokens: number, overlap: number = 100): TextChunk[] {
-  // Rough estimate: 1 token ≈ 4 characters
+  // Rough estimate: 1 token ~= 4 characters
   return chunkText(text, {
     chunkSize: maxTokens * 4,
     chunkOverlap: overlap * 4,

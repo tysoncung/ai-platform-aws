@@ -1,0 +1,122 @@
+<mxfile host="draw.io" modified="2026-02-27T01:00:00.000Z" agent="draw.io" version="24.0.0">
+  <diagram name="Multi-Agent Patterns" id="multi-agent">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Multi-Agent Orchestration Patterns" style="text;html=1;fontSize=20;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="450" y="10" width="400" height="40" as="geometry"/>
+        </mxCell>
+        <!-- ROUTER PATTERN -->
+        <mxCell id="r-box" value="Router Pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="70" width="350" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-task" value="Task" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="105" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-router" value="Router Agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#CC7A00;fontColor=#FFF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="185" width="130" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-a1" value="Agent A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="275" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-a2" value="Agent B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="155" y="275" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-a3" value="Agent C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="260" y="275" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-result" value="Result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="355" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="re1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="r-task" target="r-router" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="re2" value="picks best" style="strokeColor=#333;strokeWidth=1;dashed=1;" edge="1" source="r-router" target="r-a1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="re3" style="strokeColor=#333;strokeWidth=1;dashed=1;" edge="1" source="r-router" target="r-a2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="re4" style="strokeColor=#333;strokeWidth=1;dashed=1;" edge="1" source="r-router" target="r-a3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="re5" style="strokeColor=#2E7D32;strokeWidth=2;" edge="1" source="r-a2" target="r-result" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- PIPELINE PATTERN -->
+        <mxCell id="p-box" value="Pipeline Pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="70" width="350" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-task" value="Task" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="545" y="105" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-a1" value="Agent A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="545" y="185" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-a2" value="Agent B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="545" y="250" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-a3" value="Agent C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="545" y="315" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-result" value="Result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="545" y="375" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pe1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="p-task" target="p-a1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pe2" style="strokeColor=#333;strokeWidth=2;" edge="1" source="p-a1" target="p-a2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pe3" style="strokeColor=#333;strokeWidth=2;" edge="1" source="p-a2" target="p-a3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pe4" style="strokeColor=#333;strokeWidth=2;" edge="1" source="p-a3" target="p-result" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- PARALLEL PATTERN -->
+        <mxCell id="pa-box" value="Parallel Pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9900;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="70" width="350" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-task" value="Task" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="925" y="105" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-a1" value="Agent A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="820" y="210" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-a2" value="Agent B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="925" y="210" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-a3" value="Agent C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="210" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-merge" value="Merge Results" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9900;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="905" y="300" width="120" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pa-result" value="Result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="925" y="375" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="pae1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-task" target="pa-a1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae2" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-task" target="pa-a2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae3" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-task" target="pa-a3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae4" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-a1" target="pa-merge" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae5" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-a2" target="pa-merge" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae6" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-a3" target="pa-merge" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pae7" style="strokeColor=#333;strokeWidth=2;" edge="1" source="pa-merge" target="pa-result" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- SUPERVISOR PATTERN -->
+        <mxCell id="s-box" value="Supervisor Pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="70" width="380" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-task" value="Task" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="105" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-sup" value="Supervisor&#xa;Agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#CC7A00;fontColor=#FFF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="190" width="130" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-w1" value="Worker A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="290" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-w2" value="Worker B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="290" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-w3" value="Worker C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="290" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-result" value="Result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="375" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="se1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="s-task" target="s-sup" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se2" value="delegate" style="strokeColor=#333;strokeWidth=1;" edge="1" source="s-sup" target="s-w1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se3" value="delegate" style="strokeColor=#333;strokeWidth=1;" edge="1" source="s-sup" target="s-w2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se4" value="delegate" style="strokeColor=#333;strokeWidth=1;" edge="1" source="s-sup" target="s-w3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se5" value="report" style="strokeColor=#7B1FA2;strokeWidth=1;dashed=1;" edge="1" source="s-w1" target="s-sup" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se6" value="report" style="strokeColor=#7B1FA2;strokeWidth=1;dashed=1;" edge="1" source="s-w2" target="s-sup" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se7" value="report" style="strokeColor=#7B1FA2;strokeWidth=1;dashed=1;" edge="1" source="s-w3" target="s-sup" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="se8" value="reviews &amp; returns" style="strokeColor=#2E7D32;strokeWidth=2;" edge="1" source="s-sup" target="s-result" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

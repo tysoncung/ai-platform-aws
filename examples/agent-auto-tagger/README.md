@@ -27,7 +27,7 @@ npx tsx index.ts
 
 ## Features Demonstrated
 
-- **Database tool** — MongoDB queries and updates
-- **Guardrails** — Blocks destructive operations (DELETE)
-- **Human-in-the-loop** — Write operations require approval (auto-approved in demo)
-- **ReAct loop** — Agent reasons about each product before tagging
+- **Database tool** - MongoDB queries and updates
+- **Guardrails** - Blocks destructive operations (DELETE)
+- **Human-in-the-loop** - Write operations require approval (auto-approved in demo)
+- **ReAct loop** - Agent reasons about each product before tagging

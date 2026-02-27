@@ -46,9 +46,9 @@ async function main() {
     const approval = new HumanApproval({
       requireApproval: approveWrites(),
       handler: async (_call, description) => {
-        console.log(`\n⚠️  Approval requested:\n${description}`);
+        console.log(`\n  Approval requested:\n${description}`);
         // Auto-approve in this example; in production, prompt the user
-        console.log('✅ Auto-approved (demo mode)\n');
+        console.log(' Auto-approved (demo mode)\n');
         return true;
       },
     });
@@ -64,7 +64,7 @@ async function main() {
         onToolCall: async (call) => {
           const gr = await guardrails.checkToolCall(call);
           if (!gr.allowed) {
-            console.log(`🛑 Guardrail blocked: ${gr.reason}`);
+            console.log(` Guardrail blocked: ${gr.reason}`);
             return false;
           }
           return approval.requestApproval(call);
@@ -83,7 +83,7 @@ Process all untagged products in the catalog.`,
       gateway,
     );
 
-    console.log('🏷️  Starting auto-tagger agent...\n');
+    console.log('  Starting auto-tagger agent...\n');
 
     const result = await agent.run(
       'Find all products without tags in the products collection and add relevant tags to each one based on their description and category.',

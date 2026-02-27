@@ -2,7 +2,7 @@
  * Usage Tracker Middleware
  *
  * Tracks per-tenant token usage and estimated costs for billing.
- * This is an in-memory implementation for demonstration — in production,
+ * This is an in-memory implementation for demonstration - in production,
  * use a database (DynamoDB, PostgreSQL, etc.).
  */
 
@@ -13,7 +13,7 @@ import type { TenantRequest, UsageRecord, UsageSummary, RateLimitEntry } from '.
 const usageRecords: UsageRecord[] = [];
 const rateLimits = new Map<string, RateLimitEntry>();
 
-// Cost estimates per 1k tokens (simplified — real pricing varies by model)
+// Cost estimates per 1k tokens (simplified - real pricing varies by model)
 const COST_PER_1K: Record<string, { input: number; output: number }> = {
   'bedrock/claude-3-haiku': { input: 0.00025, output: 0.00125 },
   'bedrock/claude-3-sonnet': { input: 0.003, output: 0.015 },

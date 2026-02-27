@@ -2,10 +2,10 @@
 
 Get started with AWS Bedrock through the AI Gateway. This example demonstrates:
 
-- **Text completion** — Chat with models via Bedrock
-- **Streaming** — Receive responses token-by-token
-- **Embeddings** — Generate vector embeddings with Titan
-- **Image analysis** — Send images to vision-capable models
+- **Text completion** - Chat with models via Bedrock
+- **Streaming** - Receive responses token-by-token
+- **Embeddings** - Generate vector embeddings with Titan
+- **Image analysis** - Send images to vision-capable models
 
 ## Prerequisites
 
@@ -29,10 +29,10 @@ pnpm start
 
 ## How It Works
 
-This example uses the `@ai-platform-aws/sdk` client to communicate with the gateway. The gateway handles all AWS Bedrock authentication and request translation — your application code stays provider-agnostic.
+This example uses the `@ai-platform-aws/sdk` client to communicate with the gateway. The gateway handles all AWS Bedrock authentication and request translation - your application code stays provider-agnostic.
 
 ```
-Your App → AI Gateway → AWS Bedrock → Model Response
+Your App -> AI Gateway -> AWS Bedrock -> Model Response
 ```
 
 The models used (e.g. `bedrock/claude-3-haiku`) are configured in the gateway's provider registry. See the gateway configuration for available model aliases.
@@ -42,4 +42,4 @@ The models used (e.g. `bedrock/claude-3-haiku`) are configured in the gateway's 
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `GATEWAY_URL` | AI Gateway base URL | `http://localhost:3000` |
-| `GATEWAY_API_KEY` | API key for gateway authentication | — |
+| `GATEWAY_API_KEY` | API key for gateway authentication | - |

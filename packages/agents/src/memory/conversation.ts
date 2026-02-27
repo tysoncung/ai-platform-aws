@@ -8,7 +8,7 @@ export interface ConversationMemoryOptions {
 
 /**
  * In-memory conversation history with a sliding window.
- * Short-term memory only — facts are stored in memory but not persisted.
+ * Short-term memory only - facts are stored in memory but not persisted.
  */
 export class ConversationMemory implements MemoryProvider {
   private messages: Message[] = [];

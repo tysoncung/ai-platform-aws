@@ -5,27 +5,27 @@ Full **Retrieval-Augmented Generation** pipeline using the AI Gateway and MongoD
 ## Architecture
 
 ```
-                    ┌─────────────┐
-                    │  Markdown   │
-                    │   Docs      │
-                    └──────┬──────┘
-                           │ ingest.ts
-                    ┌──────▼──────┐     ┌──────────────┐
-                    │   Chunk &   │────▶│  AI Gateway   │
-                    │   Embed     │◀────│  (embeddings) │
-                    └──────┬──────┘     └──────────────┘
-                           │
-                    ┌──────▼──────┐
-                    │  MongoDB    │
-                    │  Atlas      │
-                    │  (vectors)  │
-                    └──────┬──────┘
-                           │ search.ts / chat.ts
-                    ┌──────▼──────┐     ┌──────────────┐
-                    │  Query →    │────▶│  AI Gateway   │
-                    │  Retrieve → │◀────│  (LLM chat)  │
-                    │  Generate   │     └──────────────┘
-                    └─────────────┘
+                    
+                      Markdown   
+                       Docs      
+                    
+                            ingest.ts
+                         
+                       Chunk &   >  AI Gateway   
+                       Embed     <  (embeddings) 
+                         
+                           
+                    
+                      MongoDB    
+                      Atlas      
+                      (vectors)  
+                    
+                            search.ts / chat.ts
+                         
+                      Query ->    >  AI Gateway   
+                      Retrieve -> <  (LLM chat)  
+                      Generate        
+                    
 ```
 
 ## Scripts
@@ -89,9 +89,9 @@ pnpm chat "How do I handle rate limit errors?"
 
 The `sample-data/` directory contains fake product documentation for "AcmeCloud":
 
-- `product-overview.md` — Features and pricing
-- `getting-started.md` — Installation and quick start
-- `troubleshooting.md` — Common issues and solutions
+- `product-overview.md` - Features and pricing
+- `getting-started.md` - Installation and quick start
+- `troubleshooting.md` - Common issues and solutions
 
 Replace these with your own documents for real use cases.
 
@@ -100,7 +100,7 @@ Replace these with your own documents for real use cases.
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `GATEWAY_URL` | AI Gateway URL | `http://localhost:3000` |
-| `GATEWAY_API_KEY` | Gateway API key | — |
+| `GATEWAY_API_KEY` | Gateway API key | - |
 | `MONGODB_URI` | MongoDB connection string | `mongodb://localhost:27017` |
 | `MONGODB_DATABASE` | Database name | `rag_demo` |
 | `MONGODB_COLLECTION` | Collection name | `documents` |

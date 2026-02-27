@@ -2,7 +2,7 @@ import type { FastifyInstance } from 'fastify';
 
 export function registerAuthMiddleware(app: FastifyInstance, apiKeys: string[]): void {
   if (apiKeys.length === 0) {
-    app.log.warn('No API keys configured — auth is disabled');
+    app.log.warn('No API keys configured - auth is disabled');
     return;
   }
 

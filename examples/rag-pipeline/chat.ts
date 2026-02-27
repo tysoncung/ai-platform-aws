@@ -1,5 +1,5 @@
 /**
- * RAG Pipeline — Chat with Documents
+ * RAG Pipeline - Chat with Documents
  *
  * Full retrieval-augmented generation flow:
  * 1. User asks a question
@@ -38,18 +38,18 @@ const TOP_K = 3;
 // ---------------------------------------------------------------------------
 
 async function ragChat(question: string) {
-  console.log(`💬 Question: "${question}"\n`);
+  console.log(` Question: "${question}"\n`);
 
-  // ── Step 1: Embed the question ──
-  console.log('1️⃣  Embedding query...');
+  //  Step 1: Embed the question 
+  console.log('1  Embedding query...');
   const embResponse = await gateway.embed({
     model: EMBEDDING_MODEL,
     input: [question],
   });
   const queryVector = embResponse.embeddings[0];
 
-  // ── Step 2: Retrieve relevant chunks ──
-  console.log('2️⃣  Searching for relevant documents...');
+  //  Step 2: Retrieve relevant chunks 
+  console.log('2  Searching for relevant documents...');
   const client = new MongoClient(MONGODB_URI);
   let contexts: Array<{ text: string; source: string; score: number }>;
 
@@ -86,11 +86,11 @@ async function ragChat(question: string) {
 
   // Show retrieved context (for debugging)
   for (const [i, ctx] of contexts.entries()) {
-    console.log(`   📄 [${ctx.source}] (score: ${ctx.score.toFixed(4)})`);
+    console.log(`    [${ctx.source}] (score: ${ctx.score.toFixed(4)})`);
     console.log(`      ${ctx.text.slice(0, 80)}...`);
   }
 
-  // ── Step 3: Augment prompt with retrieved context ──
+  //  Step 3: Augment prompt with retrieved context 
   const contextBlock = contexts
     .map((ctx, i) => `[Source ${i + 1}: ${ctx.source}]\n${ctx.text}`)
     .join('\n\n');
@@ -102,11 +102,11 @@ Be concise and cite your sources (e.g. [Source 1]).
 CONTEXT:
 ${contextBlock}`;
 
-  // ── Step 4: Generate answer ──
-  console.log(`\n3️⃣  Generating answer with ${CHAT_MODEL}...\n`);
+  //  Step 4: Generate answer 
+  console.log(`\n3  Generating answer with ${CHAT_MODEL}...\n`);
 
   // Use streaming for a nice output experience
-  process.stdout.write('🤖 Answer: ');
+  process.stdout.write(' Answer: ');
 
   for await (const chunk of gateway.stream({
     model: CHAT_MODEL,
@@ -128,14 +128,14 @@ ${contextBlock}`;
 // ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('🤖 RAG Pipeline — Chat with Documents\n');
+  console.log(' RAG Pipeline - Chat with Documents\n');
 
   await ragChat(QUESTION);
 
-  console.log('✅ Done!');
+  console.log(' Done!');
 }
 
 main().catch((err) => {
-  console.error('❌ Chat failed:', err.message);
+  console.error(' Chat failed:', err.message);
   process.exit(1);
 });

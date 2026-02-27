@@ -4,9 +4,9 @@ Three specialized agents working in sequence to produce high-quality content.
 
 ## Pipeline
 
-1. **Researcher** — Gathers facts and data using HTTP and calculator tools
-2. **Writer** — Drafts engaging content from the research
-3. **Reviewer** — Polishes the content for accuracy and clarity
+1. **Researcher** - Gathers facts and data using HTTP and calculator tools
+2. **Writer** - Drafts engaging content from the research
+3. **Reviewer** - Polishes the content for accuracy and clarity
 
 ## Setup
 

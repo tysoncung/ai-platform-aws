@@ -11,9 +11,9 @@ AcmeCloud is a next-generation cloud platform designed for AI-native application
 
 ## Pricing
 
-- Starter: $99/month — 1M API calls, 10GB vector storage
-- Pro: $499/month — 10M API calls, 100GB vector storage, priority support
-- Enterprise: Custom pricing — unlimited calls, dedicated infrastructure
+- Starter: $99/month - 1M API calls, 10GB vector storage
+- Pro: $499/month - 10M API calls, 100GB vector storage, priority support
+- Enterprise: Custom pricing - unlimited calls, dedicated infrastructure
 
 ## Supported Models
 

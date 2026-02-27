@@ -6,7 +6,7 @@
 
 **Cause**: Invalid or expired API key.
 
-**Solution**: Generate a new API key from the dashboard. Keys expire after 90 days by default — enable auto-rotation in Settings → Security.
+**Solution**: Generate a new API key from the dashboard. Keys expire after 90 days by default - enable auto-rotation in Settings -> Security.
 
 ### 429 Too Many Requests
 
@@ -21,7 +21,7 @@
 **Solution**:
 1. Reduce `max_tokens` to get shorter responses
 2. Use a faster model (e.g. `acme-fast-v1` instead of `acme-pro-v1`)
-3. Enable streaming — partial responses arrive immediately
+3. Enable streaming - partial responses arrive immediately
 
 ### Embeddings Return Wrong Dimensions
 

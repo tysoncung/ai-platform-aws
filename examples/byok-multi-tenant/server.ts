@@ -8,7 +8,7 @@
  * - Per-user usage tracking for billing
  *
  * Flow:
- *   Client → BYOK Server → AI Gateway → Provider (Bedrock / OpenAI / etc.)
+ *   Client -> BYOK Server -> AI Gateway -> Provider (Bedrock / OpenAI / etc.)
  *
  * If the user provides their own API key via X-User-API-Key header,
  * the request is forwarded to their chosen provider using their key.
@@ -86,12 +86,12 @@ app.post('/v1/complete', async (req: TenantRequest, res) => {
     let provider: string;
 
     if (req.userApiKey && req.userProvider) {
-      // ── BYOK path: use the user's own API key ──
+      //  BYOK path: use the user's own API key 
       // In a real implementation, you'd create a gateway client configured
       // with the user's key, or call the provider API directly.
       // For this demo, we show the routing logic:
       provider = req.userProvider;
-      console.log(`[${tenantId}] BYOK request → ${provider} (user's key)`);
+      console.log(`[${tenantId}] BYOK request -> ${provider} (user's key)`);
 
       // Forward to gateway with user's provider preference
       // The gateway would need to support per-request API key override,
@@ -103,7 +103,7 @@ app.post('/v1/complete', async (req: TenantRequest, res) => {
         temperature: temperature || 0.7,
       });
     } else {
-      // ── Platform path: use Bedrock (no external API key needed) ──
+      //  Platform path: use Bedrock (no external API key needed) 
       provider = 'bedrock';
       console.log(`[${tenantId}] Platform Bedrock request`);
 
@@ -162,7 +162,7 @@ app.get('/health', (_req, res) => {
 // ---------------------------------------------------------------------------
 
 app.listen(PORT, () => {
-  console.log(`🔑 BYOK Multi-Tenant Server running on http://localhost:${PORT}`);
+  console.log(` BYOK Multi-Tenant Server running on http://localhost:${PORT}`);
   console.log(`   Platform gateway: ${process.env.GATEWAY_URL || 'http://localhost:3000'}`);
   console.log(`   Rate limit: ${maxRequests} req / ${windowMs}ms`);
   console.log('\nTest with:');

@@ -1,0 +1,6 @@
+[
+  {
+    "prompt": "Professional software architecture diagram on white background. Layered design showing: Top layer green box 'Your Application'. Second layer blue box 'AI SDK'. Third layer large orange box 'AI Gateway Service on ECS Fargate' containing Auth, Rate Limiter, Cost Tracker, Model Router. Left side purple box 'Agent Framework' with Tool Registry. Right side green box 'RAG Pipeline' with Chunker and Embedder. Bottom row of provider boxes: AWS Bedrock orange, OpenAI green, Azure OpenAI blue, Other APIs gray. Data layer: MongoDB Atlas dark green, Redis Cache red, S3 orange. Clean arrows connecting layers. Rounded rectangles, modern tech diagram style.",
+    "file": "001-professional-software-architecture-diagr.png"
+  }
+]

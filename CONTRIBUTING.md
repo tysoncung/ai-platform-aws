@@ -20,10 +20,10 @@ Thank you for your interest in contributing! Here's how to get started.
 
 ## Project Structure
 
-- `packages/gateway` — Fastify AI Gateway service
-- `packages/sdk` — TypeScript client SDK
-- `packages/rag` — RAG pipeline utilities
-- `infra` — AWS CDK deployment
+- `packages/gateway` - Fastify AI Gateway service
+- `packages/sdk` - TypeScript client SDK
+- `packages/rag` - RAG pipeline utilities
+- `infra` - AWS CDK deployment
 
 ## Workflow
 

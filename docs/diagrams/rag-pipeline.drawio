@@ -1,0 +1,69 @@
+<mxfile host="draw.io" modified="2026-02-27T01:00:00.000Z" agent="draw.io" version="24.0.0">
+  <diagram name="RAG Pipeline" id="rag-pipeline">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="RAG Pipeline — Ingestion &amp; Query Flow" style="text;html=1;fontSize=20;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="380" y="10" width="450" height="40" as="geometry"/>
+        </mxCell>
+        <!-- INGESTION -->
+        <mxCell id="ing-box" value="Ingestion Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="1100" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="docs" value="📄 Documents&#xa;(PDF, Text, HTML)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="115" width="140" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="chunk" value="Chunker&#xa;(Recursive/Semantic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="115" width="150" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="embed-ing" value="Embeddings&#xa;(Titan / OpenAI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9900;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="115" width="150" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="vectorstore" value="MongoDB Atlas&#xa;Vector Store" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00684A;strokeColor=#004D36;fontColor=#FFF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="105" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="ie1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="docs" target="chunk" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ie2" style="strokeColor=#333;strokeWidth=2;" edge="1" source="chunk" target="embed-ing" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ie3" value="store vectors" style="strokeColor=#00684A;strokeWidth=2;" edge="1" source="embed-ing" target="vectorstore" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- QUERY -->
+        <mxCell id="q-box" value="Query Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9900;fontStyle=1;fontSize=14;verticalAlign=top;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="270" width="1300" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="question" value="❓ User Question" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="350" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="embed-q" value="Embed Query" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9900;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="355" width="120" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="vsearch" value="Vector Search&#xa;(MongoDB Atlas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00684A;strokeColor=#004D36;fontColor=#FFF;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="355" width="140" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="topk" value="Top K Chunks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="355" width="110" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="prompt" value="Prompt Template&#xa;Context + Question" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="460" width="150" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="llm" value="LLM&#xa;(Bedrock / OpenAI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#CC7A00;fontColor=#FFF;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="430" width="160" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="answer" value="✅ Answer" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="435" width="120" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="qe1" style="strokeColor=#333;strokeWidth=2;" edge="1" source="question" target="embed-q" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe2" style="strokeColor=#333;strokeWidth=2;" edge="1" source="embed-q" target="vsearch" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe3" style="strokeColor=#333;strokeWidth=2;" edge="1" source="vsearch" target="topk" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe4" style="strokeColor=#333;strokeWidth=2;" edge="1" source="topk" target="prompt" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe4b" value="question" style="strokeColor=#1565C0;strokeWidth=1;dashed=1;" edge="1" source="question" target="prompt" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe5" style="strokeColor=#333;strokeWidth=2;" edge="1" source="prompt" target="llm" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="qe6" style="strokeColor=#333;strokeWidth=2;" edge="1" source="llm" target="answer" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- Vector index annotation -->
+        <mxCell id="vidx" value="vector_index" style="text;html=1;fontSize=10;fontStyle=2;align=center;fillColor=#E8F5E9;strokeColor=#2E7D32;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="115" width="90" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="vidxe" style="strokeColor=#2E7D32;strokeWidth=1;dashed=1;" edge="1" source="vectorstore" target="vidx" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

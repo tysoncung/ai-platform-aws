@@ -36,7 +36,7 @@ All API requests require an API key passed in the `Authorization` header:
 Authorization: Bearer your-api-key
 ```
 
-API keys can be created and revoked from the AcmeCloud dashboard under Settings → API Keys. Each key can be scoped to specific models and rate limits.
+API keys can be created and revoked from the AcmeCloud dashboard under Settings -> API Keys. Each key can be scoped to specific models and rate limits.
 
 ## Rate Limits
 

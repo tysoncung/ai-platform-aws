@@ -30,7 +30,7 @@ export interface UsageRecord {
   estimatedCost: number;
 }
 
-/** In-memory usage summary (for demo purposes — use a database in production) */
+/** In-memory usage summary (for demo purposes - use a database in production) */
 export interface UsageSummary {
   totalRequests: number;
   totalInputTokens: number;

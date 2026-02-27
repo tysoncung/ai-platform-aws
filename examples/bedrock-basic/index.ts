@@ -62,7 +62,7 @@ async function streamingCompletion() {
     maxTokens: 100,
     temperature: 0.7,
   })) {
-    // Each chunk is a text fragment — print without newline for smooth output
+    // Each chunk is a text fragment - print without newline for smooth output
     process.stdout.write(chunk);
   }
 
@@ -87,20 +87,20 @@ async function embeddings() {
     input: texts,
   });
 
-  // Show the shape of the embeddings (not the full vectors — they're large!)
+  // Show the shape of the embeddings (not the full vectors - they're large!)
   for (let i = 0; i < response.embeddings.length; i++) {
     const vec = response.embeddings[i];
     console.log(
       `Text ${i + 1}: ${texts[i].slice(0, 40)}...`,
-      `→ ${vec.length}-dim vector [${vec.slice(0, 3).map((n: number) => n.toFixed(4)).join(', ')}, ...]`,
+      `-> ${vec.length}-dim vector [${vec.slice(0, 3).map((n: number) => n.toFixed(4)).join(', ')}, ...]`,
     );
   }
 
   // Compute cosine similarity between first two (related) vs first and third (unrelated)
   const sim12 = cosineSimilarity(response.embeddings[0], response.embeddings[1]);
   const sim13 = cosineSimilarity(response.embeddings[0], response.embeddings[2]);
-  console.log(`\nSimilarity (text 1 ↔ text 2): ${sim12.toFixed(4)} (related)`);
-  console.log(`Similarity (text 1 ↔ text 3): ${sim13.toFixed(4)} (unrelated)`);
+  console.log(`\nSimilarity (text 1 <-> text 2): ${sim12.toFixed(4)} (related)`);
+  console.log(`Similarity (text 1 <-> text 3): ${sim13.toFixed(4)} (unrelated)`);
 }
 
 // ---------------------------------------------------------------------------
@@ -129,7 +129,7 @@ async function imageAnalysis() {
               url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1280px-GoldenGateBridge-001.jpg',
             },
           },
-        ] as unknown as string, // SDK types may not include vision yet — cast for now
+        ] as unknown as string, // SDK types may not include vision yet - cast for now
       },
     ],
     maxTokens: 200,
@@ -160,7 +160,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('🚀 Bedrock Basic Examples');
+  console.log(' Bedrock Basic Examples');
   console.log(`   Gateway: ${process.env.GATEWAY_URL || 'http://localhost:3000'}`);
 
   // Check gateway health first
@@ -168,7 +168,7 @@ async function main() {
     const health = await gateway.health();
     console.log('   Status:', health.status);
   } catch (err) {
-    console.error('⚠️  Cannot reach gateway. Make sure it is running.');
+    console.error('  Cannot reach gateway. Make sure it is running.');
     console.error(`   ${(err as Error).message}`);
     process.exit(1);
   }
@@ -179,11 +179,11 @@ async function main() {
     await embeddings();
     await imageAnalysis();
   } catch (err) {
-    console.error('\n❌ Error:', (err as Error).message);
+    console.error('\n Error:', (err as Error).message);
     process.exit(1);
   }
 
-  console.log('\n✅ All examples completed successfully!');
+  console.log('\n All examples completed successfully!');
 }
 
 main();

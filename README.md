@@ -12,19 +12,19 @@ AI Platform AWS is a unified API platform that routes AI/ML requests across mult
 ### Architecture
 
 ```
-┌─────────────┐     ┌──────────────────────────────────────┐     ┌─────────────┐
-│   Client     │────▶│          AI Gateway (Fastify)         │────▶│ AWS Bedrock  │
-│   (SDK)      │◀────│                                      │◀────│             │
-└─────────────┘     │  ┌──────┐ ┌────────┐ ┌───────────┐  │     └─────────────┘
-                    │  │ Auth │ │ Rate   │ │  Cost     │  │
-                    │  │      │ │ Limit  │ │  Tracker  │  │     ┌─────────────┐
-                    │  └──────┘ └────────┘ └───────────┘  │────▶│   OpenAI     │
-                    │                                      │◀────│             │
-                    │  ┌──────────┐  ┌──────────────────┐  │     └─────────────┘
-                    │  │  Redis   │  │    MongoDB       │  │
-                    │  │  Cache   │  │  Prompt Store    │  │
-                    │  └──────────┘  └──────────────────┘  │
-                    └──────────────────────────────────────┘
+          
+   Client     >          AI Gateway (Fastify)         > AWS Bedrock  
+   (SDK)      <                                      <             
+                
+                       Auth   Rate      Cost       
+                              Limit     Tracker         
+                          >   OpenAI     
+                                                          <             
+                               
+                        Redis         MongoDB         
+                        Cache       Prompt Store      
+                          
+                    
 ```
 
 ## Quick Start
@@ -154,9 +154,9 @@ Health check endpoint.
 ### AWS Bedrock
 
 Supported models:
-- `claude-3-sonnet` — High capability
-- `claude-3-haiku` — Fast and cost-effective
-- `titan-embed` — Text embeddings
+- `claude-3-sonnet` - High capability
+- `claude-3-haiku` - Fast and cost-effective
+- `titan-embed` - Text embeddings
 
 Configure via environment variables:
 ```bash
@@ -168,10 +168,10 @@ AWS_SECRET_ACCESS_KEY=your-secret
 ### OpenAI
 
 Supported models:
-- `gpt-4o` — Latest GPT-4
-- `gpt-4o-mini` — Cost-effective
-- `text-embedding-3-small` — Compact embeddings
-- `text-embedding-3-large` — High-dimension embeddings
+- `gpt-4o` - Latest GPT-4
+- `gpt-4o-mini` - Cost-effective
+- `text-embedding-3-small` - Compact embeddings
+- `text-embedding-3-large` - High-dimension embeddings
 
 ```bash
 OPENAI_API_KEY=your-key
@@ -219,10 +219,10 @@ pnpm cdk deploy --all --context alarmEmail=you@example.com
 ```
 
 This deploys:
-- **ECS Fargate** — Auto-scaling container service (2–10 tasks)
-- **Application Load Balancer** — Public-facing HTTPS endpoint
-- **ElastiCache Redis** — Response caching
-- **CloudWatch** — Dashboards and alarms
+- **ECS Fargate** - Auto-scaling container service (2-10 tasks)
+- **Application Load Balancer** - Public-facing HTTPS endpoint
+- **ElastiCache Redis** - Response caching
+- **CloudWatch** - Dashboards and alarms
 
 ## Monorepo Management
 
@@ -246,7 +246,7 @@ pnpm nx run gateway:typecheck
 
 ### OpenAPI Contract-First
 
-The API contract is defined in `packages/openapi/openapi.yaml`. TypeScript types are auto-generated from this spec and shared across the gateway and SDK — a single source of truth.
+The API contract is defined in `packages/openapi/openapi.yaml`. TypeScript types are auto-generated from this spec and shared across the gateway and SDK - a single source of truth.
 
 ```bash
 # Generate types from the OpenAPI spec
@@ -266,26 +266,26 @@ The `@ai-platform-aws/agents` package provides a full agentic AI framework built
 The Gateway handles LLM calls; Agents handle orchestration, tool use, memory, and multi-step reasoning.
 
 ```
-                    ┌─────────────────────────────────┐
-                    │          Agent (ReAct Loop)      │
-                    │                                  │
-                    │  Think → Act → Observe → Repeat  │
-                    │                                  │
-                    │  ┌────────┐  ┌───────────────┐  │
-                    │  │ Tools  │  │    Memory      │  │
-                    │  │        │  │ (Short + Long) │  │
-                    │  └────────┘  └───────────────┘  │
-                    │                                  │
-                    │  ┌────────────┐  ┌───────────┐  │
-                    │  │ Guardrails │  │  Planner   │  │
-                    │  └────────────┘  └───────────┘  │
-                    └───────────────┬──────────────────┘
-                                    │ LLM calls
-                                    ▼
-                    ┌──────────────────────────────────┐
-                    │          AI Gateway              │
-                    │   (Bedrock, OpenAI, etc.)        │
-                    └──────────────────────────────────┘
+                    
+                              Agent (ReAct Loop)      
+                                                      
+                      Think -> Act -> Observe -> Repeat  
+                                                      
+                          
+                       Tools        Memory        
+                                 (Short + Long)   
+                          
+                                                      
+                          
+                       Guardrails     Planner     
+                          
+                    
+                                     LLM calls
+                                    
+                    
+                              AI Gateway              
+                       (Bedrock, OpenAI, etc.)        
+                    
 ```
 
 ### Quick Start
@@ -313,13 +313,13 @@ console.log(result.output);
 
 ### Features
 
-- **ReAct Loop** — Think → Act → Observe → Repeat until done
-- **Built-in Tools** — HTTP, MongoDB, vector search, calculator, file system, sandboxed code execution
-- **Memory** — In-memory conversation history + MongoDB-backed long-term memory with vector search
-- **Planner** — LLM-powered task decomposition and re-planning on failure
-- **Multi-Agent Orchestration** — Route, pipeline, parallel, and supervisor patterns
-- **Guardrails** — Block destructive ops, PII detection, cost limits, domain allowlists
-- **Human-in-the-Loop** — Configurable approval for sensitive tool calls
+- **ReAct Loop** - Think -> Act -> Observe -> Repeat until done
+- **Built-in Tools** - HTTP, MongoDB, vector search, calculator, file system, sandboxed code execution
+- **Memory** - In-memory conversation history + MongoDB-backed long-term memory with vector search
+- **Planner** - LLM-powered task decomposition and re-planning on failure
+- **Multi-Agent Orchestration** - Route, pipeline, parallel, and supervisor patterns
+- **Guardrails** - Block destructive ops, PII detection, cost limits, domain allowlists
+- **Human-in-the-Loop** - Configurable approval for sensitive tool calls
 
 See [`packages/agents/`](packages/agents/) for full documentation.
 
@@ -329,12 +329,12 @@ Ready-to-run examples demonstrating real-world usage patterns:
 
 | Example | Description |
 |---------|-------------|
-| [Bedrock Basic](examples/bedrock-basic/) | Get started with AWS Bedrock — completions, streaming, embeddings, and vision |
+| [Bedrock Basic](examples/bedrock-basic/) | Get started with AWS Bedrock - completions, streaming, embeddings, and vision |
 | [OpenAI External](examples/openai-external/) | Use OpenAI models with automatic fallback to Bedrock |
 | [BYOK Multi-Tenant](examples/byok-multi-tenant/) | Let users bring their own API keys with per-tenant billing and rate limiting |
 | [RAG Pipeline](examples/rag-pipeline/) | Full retrieval-augmented generation with MongoDB Atlas Vector Search |
 | [Agent Basic](examples/agent-basic/) | Simple agent with calculator + HTTP tools using the ReAct pattern |
-| [Agent Multi](examples/agent-multi/) | Multi-agent pipeline: researcher → writer → reviewer |
+| [Agent Multi](examples/agent-multi/) | Multi-agent pipeline: researcher -> writer -> reviewer |
 | [Agent Auto-Tagger](examples/agent-auto-tagger/) | Agent that auto-tags a product catalog using DB queries + LLM analysis |
 
 Each example is self-contained with its own README, dependencies, and `.env.example`.
@@ -343,24 +343,24 @@ Each example is self-contained with its own README, dependencies, and `.env.exam
 
 ```
 ai-platform-aws/
-├── packages/
-│   ├── openapi/          # OpenAPI spec & generated types
-│   ├── gateway/          # Fastify AI Gateway service
-│   ├── sdk/              # TypeScript client SDK (openapi-fetch)
-│   ├── rag/              # RAG pipeline utilities
-│   └── agents/           # Agentic AI framework (ReAct, tools, memory, orchestration)
-├── examples/
-│   ├── bedrock-basic/    # AWS Bedrock usage examples
-│   ├── openai-external/  # OpenAI with fallback
-│   ├── byok-multi-tenant/# Bring Your Own Key multi-tenant
-│   ├── rag-pipeline/     # Full RAG with MongoDB Atlas
-│   ├── agent-basic/      # Simple agent example
-│   ├── agent-multi/      # Multi-agent pipeline
-│   └── agent-auto-tagger/# Auto-tagging with DB + LLM
-├── infra/                # AWS CDK infrastructure
-├── nx.json               # Nx configuration
-├── docker-compose.yml    # Local development
-└── .github/workflows/    # CI/CD (nx affected)
+ packages/
+    openapi/          # OpenAPI spec & generated types
+    gateway/          # Fastify AI Gateway service
+    sdk/              # TypeScript client SDK (openapi-fetch)
+    rag/              # RAG pipeline utilities
+    agents/           # Agentic AI framework (ReAct, tools, memory, orchestration)
+ examples/
+    bedrock-basic/    # AWS Bedrock usage examples
+    openai-external/  # OpenAI with fallback
+    byok-multi-tenant/# Bring Your Own Key multi-tenant
+    rag-pipeline/     # Full RAG with MongoDB Atlas
+    agent-basic/      # Simple agent example
+    agent-multi/      # Multi-agent pipeline
+    agent-auto-tagger/# Auto-tagging with DB + LLM
+ infra/                # AWS CDK infrastructure
+ nx.json               # Nx configuration
+ docker-compose.yml    # Local development
+ .github/workflows/    # CI/CD (nx affected)
 ```
 
 ## Contributing

@@ -1,5 +1,5 @@
 /**
- * RAG Pipeline — Document Ingestion
+ * RAG Pipeline - Document Ingestion
  *
  * Loads markdown documents, chunks them, generates embeddings via the
  * AI Gateway, and stores them in MongoDB Atlas with vector search support.
@@ -91,7 +91,7 @@ function chunkText(text: string, source: string, size = CHUNK_SIZE, overlap = CH
 // ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('📄 RAG Pipeline — Document Ingestion\n');
+  console.log(' RAG Pipeline - Document Ingestion\n');
 
   // 1. Load markdown files
   const files = readdirSync(SAMPLE_DATA_DIR).filter((f: string) => f.endsWith('.md'));
@@ -134,7 +134,7 @@ async function main() {
     const db = client.db(DB_NAME);
     const collection = db.collection(COLLECTION_NAME);
 
-    // Clear existing documents (for demo — don't do this in production!)
+    // Clear existing documents (for demo - don't do this in production!)
     await collection.deleteMany({});
 
     // Insert chunks with embeddings
@@ -150,7 +150,7 @@ async function main() {
     console.log(`Inserted ${docs.length} documents into ${DB_NAME}.${COLLECTION_NAME}`);
 
     // Remind about vector search index
-    console.log('\n⚠️  Make sure you create a vector search index in MongoDB Atlas:');
+    console.log('\n  Make sure you create a vector search index in MongoDB Atlas:');
     console.log(`   Collection: ${DB_NAME}.${COLLECTION_NAME}`);
     console.log('   Index definition:');
     console.log('   {');
@@ -165,10 +165,10 @@ async function main() {
     await client.close();
   }
 
-  console.log('\n✅ Ingestion complete!');
+  console.log('\n Ingestion complete!');
 }
 
 main().catch((err) => {
-  console.error('❌ Ingestion failed:', err.message);
+  console.error(' Ingestion failed:', err.message);
   process.exit(1);
 });

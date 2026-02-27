@@ -1,5 +1,5 @@
 /**
- * RAG Pipeline — Vector Search
+ * RAG Pipeline - Vector Search
  *
  * Performs natural language search against the ingested documents using
  * MongoDB Atlas Vector Search. Converts the query to an embedding, then
@@ -27,7 +27,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const DB_NAME = process.env.MONGODB_DATABASE || 'rag_demo';
 const COLLECTION_NAME = process.env.MONGODB_COLLECTION || 'documents';
 
-// The search query — override via CLI: `pnpm search "your query"`
+// The search query - override via CLI: `pnpm search "your query"`
 const QUERY = process.argv[2] || 'What are the pricing plans?';
 const TOP_K = 3; // Number of results to return
 
@@ -37,7 +37,7 @@ const TOP_K = 3; // Number of results to return
 
 export async function vectorSearch(query: string, topK = TOP_K) {
   // Step 1: Convert query to embedding
-  console.log(`🔍 Query: "${query}"`);
+  console.log(` Query: "${query}"`);
   console.log(`   Embedding with ${EMBEDDING_MODEL}...`);
 
   const embResponse = await gateway.embed({
@@ -88,11 +88,11 @@ export async function vectorSearch(query: string, topK = TOP_K) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('🔎 RAG Pipeline — Vector Search\n');
+  console.log(' RAG Pipeline - Vector Search\n');
 
   const results = await vectorSearch(QUERY);
 
-  console.log(`\n📋 Top ${results.length} results:\n`);
+  console.log(`\n Top ${results.length} results:\n`);
   for (const [i, result] of results.entries()) {
     console.log(`--- Result ${i + 1} (score: ${(result.score as number).toFixed(4)}, source: ${result.source}) ---`);
     console.log(result.text);
@@ -101,6 +101,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('❌ Search failed:', err.message);
+  console.error(' Search failed:', err.message);
   process.exit(1);
 });
