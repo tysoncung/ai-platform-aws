@@ -3,6 +3,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as elasticache from 'aws-cdk-lib/aws-elasticache';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
 import type { Construct } from 'constructs';
 
 export interface GatewayStackProps extends cdk.StackProps {
@@ -66,6 +67,16 @@ export class GatewayStack extends cdk.Stack {
         },
       },
       publicLoadBalancer: true,
+      enableExecuteCommand: true,
+    });
+
+    // Enable X-Ray tracing
+    this.service.taskDefinition.addContainer('xray-daemon', {
+      image: ecs.ContainerImage.fromRegistry('amazon/aws-xray-daemon'),
+      memoryLimitMiB: 64,
+      essential: false,
+      portMappings: [{ containerPort: 2000, protocol: ecs.Protocol.UDP }],
+      logging: ecs.LogDrivers.awsLogs({ streamPrefix: 'xray' }),
     });
 
     // Health check
@@ -90,6 +101,15 @@ export class GatewayStack extends cdk.Stack {
     scaling.scaleOnCpuUtilization('CpuScaling', {
       targetUtilizationPercent: 70,
     });
+
+    // CloudWatch Dashboard
+    const dashboard = new cloudwatch.Dashboard(this, 'GatewayDashboard', {
+      dashboardName: 'AI-Gateway-Metrics',
+    });
+
+    dashboard.addWidgets(
+      new cloudwatch.TextWidget({ markdown: '# AI Gateway Metrics', width: 24, height: 1 }),
+    );
 
     // Outputs
     new cdk.CfnOutput(this, 'LoadBalancerDNS', {

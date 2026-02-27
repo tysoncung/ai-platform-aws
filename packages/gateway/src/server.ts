@@ -9,9 +9,16 @@ import { registerHealthRoute } from './routes/health.js';
 import { registerCompleteRoute } from './routes/complete.js';
 import { registerEmbedRoute } from './routes/embed.js';
 import { registerClassifyRoute } from './routes/classify.js';
+import { registerAdminRoutes } from './routes/admin/index.js';
+import { initTracing, shutdownTracing } from './observability/index.js';
+import logger from './observability/logger.js';
 
 async function main(): Promise<void> {
   const config = loadConfig();
+
+  // Initialize OpenTelemetry tracing
+  initTracing();
+  logger.info('OpenTelemetry tracing initialized');
 
   const app = Fastify({
     logger: {
@@ -33,6 +40,17 @@ async function main(): Promise<void> {
   registerCompleteRoute(app, registry);
   registerEmbedRoute(app, registry);
   registerClassifyRoute(app, registry);
+  registerAdminRoutes(app);
+
+  // Graceful shutdown
+  const shutdown = async (): Promise<void> => {
+    logger.info('Shutting down...');
+    await shutdownTracing();
+    await app.close();
+    process.exit(0);
+  };
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
 
   // Start
   await app.listen({ port: config.port, host: config.host });

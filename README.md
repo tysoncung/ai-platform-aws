@@ -424,6 +424,71 @@ Ready-to-run examples demonstrating real-world usage patterns:
 
 Each example is self-contained with its own README, dependencies, and `.env.example`.
 
+## Observability
+
+The gateway includes built-in observability features:
+
+### OpenTelemetry Tracing
+
+Distributed tracing for every LLM request with nested spans (request -> provider call -> cache check). Traces include provider, model, token counts, latency, and cost attributes.
+
+- Configure via `OTEL_EXPORTER_OTLP_ENDPOINT` env var
+- Compatible with AWS X-Ray, Jaeger, and any OTLP endpoint
+- Local development: Jaeger UI at `http://localhost:16686`
+
+### Structured Logging
+
+JSON-structured logging via pino with request context:
+
+- Configure log level via `LOG_LEVEL` env var (debug, info, warn, error)
+- Every log includes request ID, provider, model, tokens, and cost
+
+### Metrics
+
+Prometheus-compatible metrics at `/metrics`:
+
+- `ai_gateway_requests_total` - total requests (per provider/model)
+- `ai_gateway_tokens_total` - total tokens consumed
+- `ai_gateway_cost_total` - total cost in USD
+- `ai_gateway_latency_seconds` - request latency histogram
+- `ai_gateway_errors_total` - error count
+
+## Admin Dashboard
+
+A React-based dashboard for monitoring and managing the gateway.
+
+- **Overview** - Request counts, token usage, cost, error rates, charts
+- **Cost Analytics** - Cost breakdowns by provider/model, projections
+- **Agent Runs** - View agent execution history with step-by-step details
+- **Prompts** - Manage prompt templates with versioning
+- **Settings** - System status, provider health, cache status
+
+### Running the Dashboard
+
+```bash
+# With Docker Compose
+docker-compose up -d dashboard
+# Dashboard at http://localhost:3200
+
+# Local development
+cd packages/dashboard
+pnpm dev
+```
+
+### Admin API
+
+All admin endpoints require `Authorization: Bearer <ADMIN_API_KEY>` header.
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/admin/stats` | GET | Overview stats (requests, tokens, cost, errors) |
+| `/admin/costs` | GET | Cost analytics with filtering |
+| `/admin/agent-runs` | GET | List agent runs |
+| `/admin/agent-runs/:id` | GET | Single agent run with steps |
+| `/admin/prompts` | GET | List prompt templates |
+| `/admin/prompts/:id` | PUT | Update a prompt template |
+| `/admin/health` | GET | Detailed system health |
+
 ## Project Structure
 
 ```
@@ -431,6 +496,10 @@ ai-platform-aws/
  packages/
     openapi/          # OpenAPI spec & generated types
     gateway/          # Fastify AI Gateway service
+      src/
+        observability/  # Tracing, logging, metrics
+        routes/admin/   # Admin API endpoints
+    dashboard/        # React admin dashboard (Vite + TailwindCSS)
     sdk/              # TypeScript client SDK (openapi-fetch)
     rag/              # RAG pipeline utilities
     agents/           # Agentic AI framework (ReAct, tools, memory, orchestration)
