@@ -2,8 +2,7 @@
 
 > Production-ready AI platform for AWS. Gateway, SDK, RAG, Agents, and more.
 
-[![CI](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml/badge.svg)](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml/badge.svg)](https://github.com/tysoncung/ai-platform-aws/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/tysoncung/ai-platform-aws/pulls) [![GitHub stars](https://img.shields.io/github/stars/tysoncung/ai-platform-aws)](https://github.com/tysoncung/ai-platform-aws/stargazers)
 
 ## Overview
 
@@ -31,6 +30,10 @@ graph TD
 ![Architecture Overview](docs/diagrams/architecture-overview.png)
 
 > *Editable source: [architecture-overview.drawio](docs/diagrams/architecture-overview.drawio) -- open in [draw.io](https://app.diagrams.net/)*
+
+## Dashboard
+
+![Admin Dashboard](docs/screenshots/001-screenshot-of-a-modern-dark-themed-admin.png)
 
 ## Quick Start
 

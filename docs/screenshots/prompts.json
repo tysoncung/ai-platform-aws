@@ -1,0 +1,6 @@
+[
+  {
+    "prompt": "Screenshot of a modern dark-themed admin dashboard for an AI platform. Left sidebar with navigation (Overview, Agent Runs, Costs, Prompts, Settings). Main area shows: top row of stat cards (Total Requests: 12,847, Avg Latency: 245ms, Total Cost: $127.43, Active Agents: 8). Below that a line chart showing requests over time (last 7 days trending up) and a donut chart showing provider distribution (Bedrock 45%, OpenAI 30%, Anthropic 15%, Gemini 10%). Dark background (#0f172a), blue/purple accent colors. Clean modern UI with Tailwind styling.",
+    "file": "001-screenshot-of-a-modern-dark-themed-admin.png"
+  }
+]

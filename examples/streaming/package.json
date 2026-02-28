@@ -1,0 +1,14 @@
+{
+  "name": "@ai-platform-aws/example-streaming",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SSE streaming example for the AI Gateway",
+  "scripts": {
+    "start": "tsx index.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
