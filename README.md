@@ -35,6 +35,10 @@ graph TD
 
 ![Admin Dashboard](docs/screenshots/001-screenshot-of-a-modern-dark-themed-admin.png)
 
+## Examples
+
+Looking for runnable, self-contained examples? Check out **[ai-platform-aws-examples](https://github.com/tysoncung/ai-platform-aws-examples)** - 7 standalone projects covering gateway, RAG, agents, streaming, cost tracking, and full-stack deployment.
+
 ## Quick Start
 
 ### Using Docker Compose
